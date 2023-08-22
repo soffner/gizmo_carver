@@ -2,6 +2,7 @@
 
 [![Python](https://img.shields.io/badge/python-3.9-blue)](https://www.python.org/downloads/)
 [![yt](https://img.shields.io/badge/yt-4.0.2-blue)](https://yt-project.org/)
+[![yt_astro_analysis](https://yt-astro-analysis.readthedocs.io/en/latest/)](https://yt-project.org/)
 [![radmc3dPy](https://img.shields.io/badge/radmc3dPy-0.30.2-blue)](https://www.ita.uni-heidelberg.de/~dullemond/software/radmc-3d/manual_rmcpy/index.html)
 [![matplotlib](https://img.shields.io/badge/matplotlib-3.5.0-blue)](https://matplotlib.org/)
 [![numpy](https://img.shields.io/badge/numpy-4.0.2-blue)](https://numpy.org/)
