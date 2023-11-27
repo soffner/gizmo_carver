@@ -1,5 +1,6 @@
 matplotlib==3.5.0
 numpy==1.20.3
 yt==4.0.2
+yt_astro_analysis==1.1.2
 radmc3dPy==0.30.2
 radmc3d==2.0

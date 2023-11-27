@@ -20,6 +20,7 @@
 import numpy as np
 import yt
 from astropy import constants as const
+
 from yt.utilities.lib.write_array import (
     write_3D_array,
     write_3D_vector_array,
@@ -28,7 +29,6 @@ from yt.extensions.astro_analysis.radmc3d_export.RadMC3DInterface import (
     RadMC3DLayer,
     RadMC3DSource,
 )
-
 
 class RadMC3DWriter_Gizmo:
     # From yt GitHub RadMC3DInterface.py RadMC3dWriter class
