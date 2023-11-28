@@ -2,3 +2,6 @@ nphot = 1000
 scattering_mode_max = 0
 lines_mode = 3
 iranfreqmode = 1
+lines_nonlte_maxiter = 500
+catch_doppler_resolution = 0.05
+lines_slowlvg_as_alternative = 1
