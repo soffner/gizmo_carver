@@ -14,21 +14,22 @@
         Aaron T. Lee, aaron.t.lee@utexas.edu
         Spring 2018
 
-   Written/Tested with Python 3.9, yt 4.0.2
+        Written/Tested with Python 3.9, yt 4.0.2
+        Further modified by Piyush Sharda (2023)
 """
 
-from yt.units import * 
+from yt.units import *
 import numpy as np
 
 # Constants for calculating derived fields
 dust_to_gas = 0.01
 mol_hydrogen_ratio = 2.0
-microturbulence_speed = 1e4 # cgs
+#microturbulence_speed = 1.77264e5 # cgs: based on the relation linewidth = 0.72 * (L/1pc)**0.56 km/s, where L is the size of the regridded cell. 
 gamma = 5.0/3.0 # Note gamma is not constant and this function is an approximation.
 helium_mass_fraction = 0.284 # Default mass fraction in Gizmo
 
 # number fraction of target species
-molecular_abundance = 2*10**-8 # abundance of NH3 relative to H2
+# molecular_abundance = 10**-4 # abundance of CO relative to H2
 
 # Mask abundance based on accreted particles
 mask_abundance = False
@@ -38,28 +39,28 @@ box_units = 'pc'
 
 # x, y, z coordinates for the center of the carved domain (e.g., location of a star core)
 # The values should match the unit given by box_units
-#box_center = [15.95957649, 15.54566532, 15.19446488] #M2e3, center = 15
-box_center = [55.8,44.8, 57.2] # Core 1, 330  #M2e4 center = 50
+box_center = [15.95957649, 15.54566532, 15.19446488] #M2e3, center = 15
+#box_center = [55.8,44.8, 57.2] # Core 1, 330  #M2e4 center = 50
 
 # Routine will generate input files for a square area centered at box_center 
 # extending to box_center += box_size on each side
 # Use same units as box_units
-box_size = 0.5 # pc (=L/2)
+box_size = 5 # pc (=L/2)
 
 # Resolution of the resulting image (give as a complex number, e.g. for 
 # box_dim = 64j, the resulting image will be 64x64)
 box_dim = 256j
 
 # Snapshot number
-snap = '330'
+snap = '2800'
 
 # Name tag for output file directory
-tag = 'sn'+snap+'_'+ np.str(np.int(np.imag(box_dim)))+'_'
+tag = 'sn'+snap+'_'+ str(int(np.imag(box_dim)))+'_'
 
 # Filepath of the HDF5 file name to read in
 # If the HDF5 file is located in the same directory as the script files, 
 # you can just put the file name
-hdf5_dir = '/scratch3/03532/mgrudic/STARFORGE_RT/production/M2e4_R10_S0_T1_B0.01_Res271_n2_sol0.5_42/output/'
+hdf5_dir = '/g/data/jh2/ps3459/starforge_data/15/'
 
 # unit base to use for calculations
 unit_base = {'UnitMagneticField_in_gauss':  1e+4,
@@ -76,14 +77,11 @@ unit_base = {'UnitMagneticField_in_gauss':  1e+4,
 # molecule_nh3.inp (Or data file for other target species)
 # radmc3d.inp
 # wavelength_micron.inp
-existing_filepath = '/home1/00653/tg458122/gizmo_carver/default_files'
+existing_filepath = '/g/data/jh2/ps3459/gizmo_carver/default_files/'
 
 # Filepath for storing output files. Routine will make a working directory within this
 # output directory for each run.
-output_filepath = '/work2/00653/tg458122/frontera/_gizmo_radmc/M2e4_fid_output_files/_cores'
-
-#M2e3_R3_S0_T1_B0.01_Res126_n2_sol0.5_42/'
-#/M2e4_fid_output_files/'#'./output_files' #Used for M2e3 tests
+output_filepath = '/g/data/jh2/ps3459/gizmo_carver/output_files/'
 
 # Write a new line file rather than use defaults file
 write_line_file = True
@@ -92,27 +90,117 @@ vmax = 10 # km/s
 # number of wavelengths in output file
 nwav = 256
 # Line rest frequency, see molecule_x.inp file
-restfreq = 23.69449550E9 # 12CO (1-0): 115.2712018E9, (2-1) 230.5380000E9
-#restfreq = 23.69449550E9 # NH3[1,1]
+restfreq_CO_J10 = 115.2712018e9
+restfreq_CO_J21 = 230.5380000e9
+restfreq_CO_J32 = 345.7959899e9
+restfreq_CO_J43 = 461.0407682e9
+restfreq_CO_J54 = 576.2679305e9
+restfreq_CO_J65 = 691.4730763e9
+restfreq_CO_J76 = 806.6518060e9
+restfreq_CO_J87 = 921.7997000e9
+restfreq_CO_J98 = 1036.9123930e9
+restfreq_CO_J109 = 1151.9854520e9
+
+restfreq_HCOp_J10 = 89.18852470e9
+restfreq_HCOp_J21 = 178.37505630e9
+restfreq_HCOp_J32 = 267.55762590e9
+restfreq_HCOp_J43 = 356.73422300e9
+restfreq_HCOp_J54 = 445.90287210e9
+restfreq_HCOp_J65 = 535.06158100e9
+restfreq_HCOp_J76 = 624.20836060e9
+restfreq_HCOp_J87 = 713.34122780e9
+restfreq_HCOp_J98 = 802.45819950e9
+restfreq_HCOp_J109 = 891.55729030e9
+
+restfreq_HCN_J10 = 88.63160220e9
+restfreq_HCN_J21 = 177.26111120e9
+restfreq_HCN_J32 = 265.88643390e9
+restfreq_HCN_J43 = 354.50547730e9
+restfreq_HCN_J54 = 443.11614850e9
+restfreq_HCN_J65 = 531.71634790e9
+restfreq_HCN_J76 = 620.30400220e9
+restfreq_HCN_J87 = 708.87700510e9
+restfreq_HCN_J98 = 797.43326230e9
+restfreq_HCN_J109 = 885.97069490e9
 
 # Output file names for use in RADMC3D
 out_afname = "amr_grid.inp"       # output file name for amr grid
-out_nfname = "numberdens_nh3.inp" # output file name for target species above
+#out_codefaultname = "numberdens_CO_default.inp" # output file name for target species above
+out_codespname = "numberdens_CO_despotic.inp" # output file name for target species (with despotic chemistry) above
+out_couclname = "numberdens_CO_uclchem.inp" # output file name for target species (with UCLCHEM chemistry) above
+
+out_hcopdespname = "numberdens_HCOp_despotic.inp"
+out_hcopuclname = "numberdens_HCOp_uclchem.inp"
+out_hcnuclname = "numberdens_HCN_uclchem.inp"
+
 out_nhname = "numberdens_h2.inp" # output file name for h2 number density
 out_vfname = "gas_velocity.inp"   # output file name for velocity
-out_tfname = "gas_temperature.inp"    # output file name for temperature
+
+out_tfname_CO = "gas_temperature_CO.inp"    # output file name for temperature
+out_tfname_HCOp = "gas_temperature_HCOp.inp"
+out_tfname_HCN = "gas_temperature_HCN.inp"
+
 out_ddfname = "dust_density.inp" # output file name for dust density
 out_dtfname = "dust_temperature.dat" # output for dust temperature (requires .dat)
 out_mtfname = "microturbulence.inp" # output for microturbulence
 
 # Names of existing files
-out_molname = 'molecule_nh3.inp' # (Or data file for other target species)
-out_wlmname = 'wavelength_micron.inp'
-out_cwlname = 'camera_wavelength_micron.inp'
+out_molname_CO = 'molecule_co.inp' # (Or data file for other target species)
+out_molname_HCOp = 'molecule_hcop.inp'
+out_molname_HCN = 'molecule_hcn.inp'
+
+# Names of lines.inp files
+out_linesname_CO = 'lines_co.inp'
+out_linesname_HCOp = 'lines_hcop.inp'
+out_linesname_HCN = 'lines_hcn.inp'
+
+out_wlmname = 'wavelength_micron.inp' #wavelength file for continuum radiative transfer: https://www.ita.uni-heidelberg.de/~dullemond/software/radmc-3d/manual_radmc3d/inputoutputfiles.html#sec-wavelengths
+
+out_cwlname_CO_J10 = 'camera_wavelength_micron_COJ10.inp' #narrowly spaced wavelengths around restfreq for line radiative transfer
+out_cwlname_CO_J21 = 'camera_wavelength_micron_COJ21.inp'
+out_cwlname_CO_J32 = 'camera_wavelength_micron_COJ32.inp'
+out_cwlname_CO_J43 = 'camera_wavelength_micron_COJ43.inp'
+out_cwlname_CO_J54 = 'camera_wavelength_micron_COJ54.inp'
+out_cwlname_CO_J65 = 'camera_wavelength_micron_COJ65.inp'
+out_cwlname_CO_J76 = 'camera_wavelength_micron_COJ76.inp'
+out_cwlname_CO_J87 = 'camera_wavelength_micron_COJ87.inp'
+out_cwlname_CO_J98 = 'camera_wavelength_micron_COJ98.inp'
+out_cwlname_CO_J109 = 'camera_wavelength_micron_COJ109.inp'
+
+out_cwlname_HCOp_J10 = 'camera_wavelength_micron_HCOpJ10.inp' #narrowly spaced wavelengths around restfreq for line radiative transfer
+out_cwlname_HCOp_J21 = 'camera_wavelength_micron_HCOpJ21.inp'
+out_cwlname_HCOp_J32 = 'camera_wavelength_micron_HCOpJ32.inp'
+out_cwlname_HCOp_J43 = 'camera_wavelength_micron_HCOpJ43.inp'
+out_cwlname_HCOp_J54 = 'camera_wavelength_micron_HCOpJ54.inp'
+out_cwlname_HCOp_J65 = 'camera_wavelength_micron_HCOpJ65.inp'
+out_cwlname_HCOp_J76 = 'camera_wavelength_micron_HCOpJ76.inp'
+out_cwlname_HCOp_J87 = 'camera_wavelength_micron_HCOpJ87.inp'
+out_cwlname_HCOp_J98 = 'camera_wavelength_micron_HCOpJ98.inp'
+out_cwlname_HCOp_J109 = 'camera_wavelength_micron_HCOpJ109.inp'
+
+out_cwlname_HCN_J10 = 'camera_wavelength_micron_HCNJ10.inp' #narrowly spaced wavelengths around restfreq for line radiative transfer
+out_cwlname_HCN_J21 = 'camera_wavelength_micron_HCNJ21.inp'
+out_cwlname_HCN_J32 = 'camera_wavelength_micron_HCNJ32.inp'
+out_cwlname_HCN_J43 = 'camera_wavelength_micron_HCNJ43.inp'
+out_cwlname_HCN_J54 = 'camera_wavelength_micron_HCNJ54.inp'
+out_cwlname_HCN_J65 = 'camera_wavelength_micron_HCNJ65.inp'
+out_cwlname_HCN_J76 = 'camera_wavelength_micron_HCNJ76.inp'
+out_cwlname_HCN_J87 = 'camera_wavelength_micron_HCNJ87.inp'
+out_cwlname_HCN_J98 = 'camera_wavelength_micron_HCNJ98.inp'
+out_cwlname_HCN_J109 = 'camera_wavelength_micron_HCNJ109.inp'
+
 out_dksname = 'dustkappa_silicate.inp'
 out_dtpname = 'dustopac.inp'
-out_linname = 'lines.inp'
 out_rmcname = 'radmc3d.inp'
 out_execute = 'radmc3d'
-out_subscript = 'submit_radmc.sh'
+
+out_jobscript_CO = 'job_co.sh'
+out_jobscript_HCOp = 'job_hcop.sh'
+out_jobscript_HCN = 'job_hcn.sh'
+
 out_makeinput = 'input_info.txt' # Save the setup parameters and output
+out_extra1 = 'radmc_moments.py'
+out_extra2 = 'recreate_cube.py'
+out_extra3 = 'check_radmc_input.py'
+out_extra4 = 'radmc_image_processing.py'
+out_extra5 = 'get_coldens_from_pytreegrav.py' #file to get the column densities from pytreegrav RT

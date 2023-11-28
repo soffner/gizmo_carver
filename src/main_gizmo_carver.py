@@ -72,7 +72,7 @@ def main_gizmo_carver(box_center=inputs.box_center, snap=inputs.snap, hdf5_dir=i
         print("Loaded file " + str(ds)) 
     except NameError:
         assert False, "YT unable to properly load file!"
-        
+
     now = datetime.now()
     dt_string = now.strftime("%m.%d.%y_%H.%M.%S")
 
@@ -81,13 +81,118 @@ def main_gizmo_carver(box_center=inputs.box_center, snap=inputs.snap, hdf5_dir=i
     working_dir_name = os.path.join(current_dir, 'RADMC_inputs_' + tag+dt_string)
     os.mkdir(working_dir_name)
 
+    #new1_dir_name = os.path.join(working_dir_name, 'default')
+    #os.mkdir(new1_dir_name)
+
+    new2_dir_name = os.path.join(working_dir_name, 'despotic')
+    os.mkdir(new2_dir_name)
+
+    new3_dir_name = os.path.join(working_dir_name, 'uclchem')
+    os.mkdir(new3_dir_name)
+
+    lines_dir_name = os.path.join(working_dir_name, 'lines')
+    os.mkdir(lines_dir_name)
+
+    temps_dir_name = os.path.join(working_dir_name, 'temperatures')
+    os.mkdir(temps_dir_name)
+
+    CO_J10_dir_name = os.path.join(working_dir_name, 'CO_J10')
+    os.mkdir(CO_J10_dir_name)
+
+    CO_J21_dir_name = os.path.join(working_dir_name, 'CO_J21')
+    os.mkdir(CO_J21_dir_name)
+
+    CO_J32_dir_name = os.path.join(working_dir_name, 'CO_J32')
+    os.mkdir(CO_J32_dir_name)
+
+    CO_J43_dir_name = os.path.join(working_dir_name, 'CO_J43')
+    os.mkdir(CO_J43_dir_name)
+
+    CO_J54_dir_name = os.path.join(working_dir_name, 'CO_J54')
+    os.mkdir(CO_J54_dir_name)
+
+    CO_J65_dir_name = os.path.join(working_dir_name, 'CO_J65')
+    os.mkdir(CO_J65_dir_name)
+
+    CO_J76_dir_name = os.path.join(working_dir_name, 'CO_J76')
+    os.mkdir(CO_J76_dir_name)
+
+    CO_J87_dir_name = os.path.join(working_dir_name, 'CO_J87')
+    os.mkdir(CO_J87_dir_name)
+
+    CO_J98_dir_name = os.path.join(working_dir_name, 'CO_J98')
+    os.mkdir(CO_J98_dir_name)
+
+    CO_J109_dir_name = os.path.join(working_dir_name, 'CO_J109')
+    os.mkdir(CO_J109_dir_name)
+
+    HCOp_J10_dir_name = os.path.join(working_dir_name, 'HCOp_J10')
+    os.mkdir(HCOp_J10_dir_name)
+
+    HCOp_J21_dir_name = os.path.join(working_dir_name, 'HCOp_J21')
+    os.mkdir(HCOp_J21_dir_name)
+
+    HCOp_J32_dir_name = os.path.join(working_dir_name, 'HCOp_J32')
+    os.mkdir(HCOp_J32_dir_name)
+
+    HCOp_J43_dir_name = os.path.join(working_dir_name, 'HCOp_J43')
+    os.mkdir(HCOp_J43_dir_name)
+
+    HCOp_J54_dir_name = os.path.join(working_dir_name, 'HCOp_J54')
+    os.mkdir(HCOp_J54_dir_name)
+
+    HCOp_J65_dir_name = os.path.join(working_dir_name, 'HCOp_J65')
+    os.mkdir(HCOp_J65_dir_name)
+
+    HCOp_J76_dir_name = os.path.join(working_dir_name, 'HCOp_J76')
+    os.mkdir(HCOp_J76_dir_name)
+
+    HCOp_J87_dir_name = os.path.join(working_dir_name, 'HCOp_J87')
+    os.mkdir(HCOp_J87_dir_name)
+
+    HCOp_J98_dir_name = os.path.join(working_dir_name, 'HCOp_J98')
+    os.mkdir(HCOp_J98_dir_name)
+
+    HCOp_J109_dir_name = os.path.join(working_dir_name, 'HCOp_J109')
+    os.mkdir(HCOp_J109_dir_name)
+
+    HCN_J10_dir_name = os.path.join(working_dir_name, 'HCN_J10')
+    os.mkdir(HCN_J10_dir_name)
+
+    HCN_J21_dir_name = os.path.join(working_dir_name, 'HCN_J21')
+    os.mkdir(HCN_J21_dir_name)
+
+    HCN_J32_dir_name = os.path.join(working_dir_name, 'HCN_J32')
+    os.mkdir(HCN_J32_dir_name)
+
+    HCN_J43_dir_name = os.path.join(working_dir_name, 'HCN_J43')
+    os.mkdir(HCN_J43_dir_name)
+
+    HCN_J54_dir_name = os.path.join(working_dir_name, 'HCN_J54')
+    os.mkdir(HCN_J54_dir_name)
+
+    HCN_J65_dir_name = os.path.join(working_dir_name, 'HCN_J65')
+    os.mkdir(HCN_J65_dir_name)
+
+    HCN_J76_dir_name = os.path.join(working_dir_name, 'HCN_J76')
+    os.mkdir(HCN_J76_dir_name)
+
+    HCN_J87_dir_name = os.path.join(working_dir_name, 'HCN_J87')
+    os.mkdir(HCN_J87_dir_name)
+
+    HCN_J98_dir_name = os.path.join(working_dir_name, 'HCN_J98')
+    os.mkdir(HCN_J98_dir_name)
+
+    HCN_J109_dir_name = os.path.join(working_dir_name, 'HCN_J109')
+    os.mkdir(HCN_J109_dir_name)
+
+
     # Make a file to store I/O and setup parameters
     f = open(os.path.join(working_dir_name, inputs.out_makeinput), 'w')
     original_stdout = sys.stdout #Reset do: sys.stdout = original_stdout 
     sys.stdout = f
     print(">> INPUT PARAMETERS (inputs_gizmo_carver.py): <<")
     print("   dust_to_gas ", inputs.dust_to_gas)
-    print("   molecular_abundance ", inputs.molecular_abundance)
     print("   mask abundance ", inputs.mask_abundance)
     print("   box_size, box_dim, box_center ", inputs.box_size, inputs.box_dim, box_center)
     print("   hdf5_file ", hdf5_file)
@@ -121,10 +226,16 @@ def main_gizmo_carver(box_center=inputs.box_center, snap=inputs.snap, hdf5_dir=i
     if inputs.mask_abundance == True:
         writer.write_line_file(('PartType0', 'MaskedMolecularNumDensity'), os.path.join(working_dir_name, inputs.out_nfname))
     else:
-        writer.write_line_file(('PartType0', 'MolecularNumDensity'), os.path.join(working_dir_name, inputs.out_nfname))
+        #writer.write_line_file(('PartType0', 'CONumberDensityDefault'), os.path.join(new1_dir_name, inputs.out_codefaultname))
+        writer.write_line_file(('PartType0', 'CONumberDensityDespotic'), os.path.join(new2_dir_name, inputs.out_codespname))
+        writer.write_line_file(('PartType0', 'HCOpNumberDensityDespotic'), os.path.join(new2_dir_name, inputs.out_hcopdespname))
+        writer.write_line_file(('PartType0', 'CONumberDensityUCLCHEM'), os.path.join(new3_dir_name, inputs.out_couclname))
+        writer.write_line_file(('PartType0', 'HCOpNumberDensityUCLCHEM'), os.path.join(new3_dir_name, inputs.out_hcopuclname))
+        writer.write_line_file(('PartType0', 'HCNNumberDensityUCLCHEM'), os.path.join(new3_dir_name, inputs.out_hcnuclname))
 
+    #writer.write_line_file(('PartType0', 'H2ColumnDensity'), os.path.join(working_dir_name, inputs.out_NHname))
     writer.write_line_file(('PartType0', 'H2NumDensity'), os.path.join(working_dir_name, inputs.out_nhname))
-        
+
     # Write the dust density file for dust (slow)
     print("3/7: Writing dust density file (slow.)")
     writer.write_dust_file(('PartType0', 'DustDensity'), os.path.join(working_dir_name, inputs.out_ddfname))
@@ -134,8 +245,12 @@ def main_gizmo_carver(box_center=inputs.box_center, snap=inputs.snap, hdf5_dir=i
 
     # Write the temperature file for species or dust (slow)
     print("5/7: Writing temperature file (slower..)")
-    print(ds.find_max(("PartType0","gas_temperature")))
-    writer.write_line_file(("PartType0", "gas_temperature"), os.path.join(working_dir_name, inputs.out_tfname))
+    print(ds.find_max(("PartType0","gas_temperature_CO")))
+    writer.write_line_file(("PartType0", "gas_temperature_CO"), os.path.join(temps_dir_name, inputs.out_tfname_CO))
+    print(ds.find_max(("PartType0","gas_temperature_HCOp")))
+    writer.write_line_file(("PartType0", "gas_temperature_HCOp"), os.path.join(temps_dir_name, inputs.out_tfname_HCOp))
+    print(ds.find_max(("PartType0","gas_temperature_HCN")))
+    writer.write_line_file(("PartType0", "gas_temperature_HCN"), os.path.join(temps_dir_name, inputs.out_tfname_HCN))
 
     # Assuming dust temperature is same as gas for now...
     print("6/7: Writing dust temperature file (slower..)")
@@ -151,22 +266,69 @@ def main_gizmo_carver(box_center=inputs.box_center, snap=inputs.snap, hdf5_dir=i
         print("Writing line file ...")
         #file = os.path.join(working_dir_name, inputs.out_cwlname)
         #print("parameters =", inputs.vmax, inputs.nwav, inputs.restfreq, len(file) )
-        writer.writeMolLineFile(os.path.join(working_dir_name, inputs.out_cwlname), inputs.vmax, inputs.nwav, inputs.restfreq)
+        writer.writeMolLineFile(os.path.join(CO_J10_dir_name, inputs.out_cwlname_CO_J10), inputs.vmax, inputs.nwav, inputs.restfreq_CO_J10)
+        writer.writeMolLineFile(os.path.join(CO_J21_dir_name, inputs.out_cwlname_CO_J21), inputs.vmax, inputs.nwav, inputs.restfreq_CO_J21)
+        writer.writeMolLineFile(os.path.join(CO_J32_dir_name, inputs.out_cwlname_CO_J32), inputs.vmax, inputs.nwav, inputs.restfreq_CO_J32)
+        writer.writeMolLineFile(os.path.join(CO_J43_dir_name, inputs.out_cwlname_CO_J43), inputs.vmax, inputs.nwav, inputs.restfreq_CO_J43)
+        writer.writeMolLineFile(os.path.join(CO_J54_dir_name, inputs.out_cwlname_CO_J54), inputs.vmax, inputs.nwav, inputs.restfreq_CO_J54)
+        writer.writeMolLineFile(os.path.join(CO_J65_dir_name, inputs.out_cwlname_CO_J65), inputs.vmax, inputs.nwav, inputs.restfreq_CO_J65)
+        writer.writeMolLineFile(os.path.join(CO_J76_dir_name, inputs.out_cwlname_CO_J76), inputs.vmax, inputs.nwav, inputs.restfreq_CO_J76)
+        writer.writeMolLineFile(os.path.join(CO_J87_dir_name, inputs.out_cwlname_CO_J87), inputs.vmax, inputs.nwav, inputs.restfreq_CO_J87)
+        writer.writeMolLineFile(os.path.join(CO_J98_dir_name, inputs.out_cwlname_CO_J98), inputs.vmax, inputs.nwav, inputs.restfreq_CO_J98)
+        writer.writeMolLineFile(os.path.join(CO_J109_dir_name, inputs.out_cwlname_CO_J109), inputs.vmax, inputs.nwav, inputs.restfreq_CO_J109)
+
+        writer.writeMolLineFile(os.path.join(HCOp_J10_dir_name, inputs.out_cwlname_HCOp_J10), inputs.vmax, inputs.nwav, inputs.restfreq_HCOp_J10)
+        writer.writeMolLineFile(os.path.join(HCOp_J21_dir_name, inputs.out_cwlname_HCOp_J21), inputs.vmax, inputs.nwav, inputs.restfreq_HCOp_J21)
+        writer.writeMolLineFile(os.path.join(HCOp_J32_dir_name, inputs.out_cwlname_HCOp_J32), inputs.vmax, inputs.nwav, inputs.restfreq_HCOp_J32)
+        writer.writeMolLineFile(os.path.join(HCOp_J43_dir_name, inputs.out_cwlname_HCOp_J43), inputs.vmax, inputs.nwav, inputs.restfreq_HCOp_J43)
+        writer.writeMolLineFile(os.path.join(HCOp_J54_dir_name, inputs.out_cwlname_HCOp_J54), inputs.vmax, inputs.nwav, inputs.restfreq_HCOp_J54)
+        writer.writeMolLineFile(os.path.join(HCOp_J65_dir_name, inputs.out_cwlname_HCOp_J65), inputs.vmax, inputs.nwav, inputs.restfreq_HCOp_J65)
+        writer.writeMolLineFile(os.path.join(HCOp_J76_dir_name, inputs.out_cwlname_HCOp_J76), inputs.vmax, inputs.nwav, inputs.restfreq_HCOp_J76)
+        writer.writeMolLineFile(os.path.join(HCOp_J87_dir_name, inputs.out_cwlname_HCOp_J87), inputs.vmax, inputs.nwav, inputs.restfreq_HCOp_J87)
+        writer.writeMolLineFile(os.path.join(HCOp_J98_dir_name, inputs.out_cwlname_HCOp_J98), inputs.vmax, inputs.nwav, inputs.restfreq_HCOp_J98)
+        writer.writeMolLineFile(os.path.join(HCOp_J109_dir_name, inputs.out_cwlname_HCOp_J109), inputs.vmax, inputs.nwav, inputs.restfreq_HCOp_J109)
+
+        writer.writeMolLineFile(os.path.join(HCN_J10_dir_name, inputs.out_cwlname_HCN_J10), inputs.vmax, inputs.nwav, inputs.restfreq_HCN_J10)
+        writer.writeMolLineFile(os.path.join(HCN_J21_dir_name, inputs.out_cwlname_HCN_J21), inputs.vmax, inputs.nwav, inputs.restfreq_HCN_J21)
+        writer.writeMolLineFile(os.path.join(HCN_J32_dir_name, inputs.out_cwlname_HCN_J32), inputs.vmax, inputs.nwav, inputs.restfreq_HCN_J32)
+        writer.writeMolLineFile(os.path.join(HCN_J43_dir_name, inputs.out_cwlname_HCN_J43), inputs.vmax, inputs.nwav, inputs.restfreq_HCN_J43)
+        writer.writeMolLineFile(os.path.join(HCN_J54_dir_name, inputs.out_cwlname_HCN_J54), inputs.vmax, inputs.nwav, inputs.restfreq_HCN_J54)
+        writer.writeMolLineFile(os.path.join(HCN_J65_dir_name, inputs.out_cwlname_HCN_J65), inputs.vmax, inputs.nwav, inputs.restfreq_HCN_J65)
+        writer.writeMolLineFile(os.path.join(HCN_J76_dir_name, inputs.out_cwlname_HCN_J76), inputs.vmax, inputs.nwav, inputs.restfreq_HCN_J76)
+        writer.writeMolLineFile(os.path.join(HCN_J87_dir_name, inputs.out_cwlname_HCN_J87), inputs.vmax, inputs.nwav, inputs.restfreq_HCN_J87)
+        writer.writeMolLineFile(os.path.join(HCN_J98_dir_name, inputs.out_cwlname_HCN_J98), inputs.vmax, inputs.nwav, inputs.restfreq_HCN_J98)
+        writer.writeMolLineFile(os.path.join(HCN_J109_dir_name, inputs.out_cwlname_HCN_J109), inputs.vmax, inputs.nwav, inputs.restfreq_HCN_J109)
+
     else:
         print("Copying exisiting line file ...")
         shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_cwlname), working_dir_name)
 
     # Copy over existing files
     print('Copying default files...')
-    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_molname), working_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_molname_CO), working_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_molname_HCOp), working_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_molname_HCN), working_dir_name)
+
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_linesname_CO), lines_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_linesname_HCOp), lines_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_linesname_HCN), lines_dir_name)
+
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_wlmname), working_dir_name)
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_dksname), working_dir_name)
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_dtpname), working_dir_name)
-    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_linname), working_dir_name)
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_rmcname), working_dir_name)
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_execute), working_dir_name)
-    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_subscript), working_dir_name)
-        
+
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_jobscript_CO), working_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_jobscript_HCOp), working_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_jobscript_HCN), working_dir_name)
+
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_extra1), working_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_extra2), working_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_extra3), working_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_extra4), working_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_extra5), working_dir_name)
+
     print('Done! Output files generated at: \n\n' + os.path.abspath(working_dir_name))
 
     return working_dir_name
