@@ -1,6 +1,10 @@
+import sys
+sys.path.append('/g/data1b/jh2/ps3459/gizmo_carver/src/')  # Add the directory to sys.path
+
+import yt
+import inputs_gizmo_carver as inputs
 import numpy as np
 import h5py
-import inputs_gizmo_carver as inputs
 import astropy.constants as cons
 
 
@@ -41,8 +45,11 @@ if 'HCNNumDensityUCLCHEM' in f['/PartType0']:
            del f['/PartType0/HCNNumDensityUCLCHEM']
            print('Deleted existing dataset HCNNumDensityUCLCHEM')
 
+if 'HNCNumDensityUCLCHEM' in f['/PartType0']:
+           del f['/PartType0/HNCNumDensityUCLCHEM']
+           print('Deleted existing dataset HNCNumDensityUCLCHEM')
 
-nh_eff = np.loadtxt('/g/data1b/jh2/ps3459/starforge_data/15/nh_eff_meshoid_100rays.txt')
+nh_eff = np.loadtxt(inputs.hdf5_dir+'nh_eff_meshoid_10rays_'+inputs.snap+'.txt')
 xH2 = f['PartType0']['MolecularMassFraction'][:]*f['PartType0']['NeutralHydrogenAbundance'][:]/inputs.mol_hydrogen_ratio
 mean_mass_H = 1.0 + inputs.helium_mass_fraction
 mean_mol_mass = mean_mass_H / (1.0 - xH2 + inputs.helium_mass_fraction/4.0)
@@ -51,28 +58,32 @@ nh2 = nh_eff * ((cons.M_sun.cgs.value/cons.pc.cgs.value**2)/(mH*mean_mol_mass)) 
 f.create_dataset('/PartType0/H2ColDensity', data=nh2)
 print('Created new dataset H2ColDensity')
 
-co_desp = np.loadtxt('/g/data1b/jh2/ps3459/starforge_data/15/co_abund_despotic_nov23_new.txt')
+co_desp = np.loadtxt(inputs.hdf5_dir+'co_abund_despotic_'+inputs.snap+'.txt')
 f.create_dataset('/PartType0/CONumDensityDespotic', data=co_desp)
 print('Created new dataset CONumDensityDespotic')
 
 
-hcop_desp = np.loadtxt('/g/data1b/jh2/ps3459/starforge_data/15/hcop_abund_despotic_nov23_new.txt')
+hcop_desp = np.loadtxt(inputs.hdf5_dir+'hcop_abund_despotic_'+inputs.snap+'.txt')
 f.create_dataset('/PartType0/HCOpNumDensityDespotic', data=hcop_desp)
 print('Created new dataset HCOpNumDensityDespotic')
 
 
-co_ucl = np.loadtxt('/g/data1b/jh2/ps3459/starforge_data/15/co_abund_uclchem_nov23_new.txt')
+co_ucl = np.loadtxt(inputs.hdf5_dir+'co_abund_uclchem_'+inputs.snap+'.txt')
 f.create_dataset('/PartType0/CONumDensityUCLCHEM', data=co_ucl)
 print('Created new dataset CONumDensityUCLCHEM')
 
 
-co_ucl = np.loadtxt('/g/data1b/jh2/ps3459/starforge_data/15/hcop_abund_uclchem_nov23_new.txt')
+co_ucl = np.loadtxt(inputs.hdf5_dir+'hcop_abund_uclchem_'+inputs.snap+'.txt')
 f.create_dataset('/PartType0/HCOpNumDensityUCLCHEM', data=co_ucl)
 print('Created new dataset HCOpNumDensityUCLCHEM')
 
-co_ucl = np.loadtxt('/g/data1b/jh2/ps3459/starforge_data/15/hcn_abund_uclchem_nov23_new.txt')
+co_ucl = np.loadtxt(inputs.hdf5_dir+'hcn_abund_uclchem_'+inputs.snap+'.txt')
 f.create_dataset('/PartType0/HCNNumDensityUCLCHEM', data=co_ucl)
 print('Created new dataset HCNNumDensityUCLCHEM')
+
+co_ucl = np.loadtxt(inputs.hdf5_dir+'hnc_abund_uclchem_'+inputs.snap+'.txt')
+f.create_dataset('/PartType0/HNCNumDensityUCLCHEM', data=co_ucl)
+print('Created new dataset HNCNumDensityUCLCHEM')
 
 
 f.close()
