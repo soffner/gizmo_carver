@@ -7,7 +7,7 @@
 
 4.) Run the ray tracing script in pytreegrav to obtain the column density of H2 for a starforge snapshot: https://github.com/mikegrudic/pytreegrav#ray-tracing
     Since this has to be done only once per snapshot, you can afford to use 100 rays with randomized directions so that you can decrease the noise and make it less correlated
-    Example script (to be run on interactive node with 48 cores if using 100 rays): get_coldens_from_pytreegrav.py (in gizmo_carver/my_default_files)
+    Example script (to be run on interactive node with 48 cores if using 100 rays): get_coldens_from_pytreegrav.py (in gizmo_carver/default_files)
 
 5.) Initialize despotic cloud available in despotic/cloudfiles/basic_starforge.desp
 
@@ -19,10 +19,11 @@
         Step c is very costly to do for each starforge particle. So, we create a 5D model grid in volume density, column density, ISRF, H2 abundance and gas temperature (these 5 matter the most for CO abundance)
         and interpolate across the grid to find the CO abundances. Works well if the grid is dense in volume and column densities (these 2 matter the most among these 5)
     d.) Same as step c but using UCLCHEM
+    Steps c and d can be done by script do_chemistry.py (or, do_chemistry_parallel.py for more speed, but only run it on one node)  available in gizmo_carver/default_files
     Save the CO abundances as a txt file
 
 7.) Load the CO abundances as a new field by creatting a new .HDF5 using h5py (yt doesn't do it for GIZMO datasets). This new field will be dimensionless in yt. 
-    Example script: add_NH2_and_CO_to_hdf5.py (in gizmo_carver/src/)
+    Example script: add_molecules_to_data.py (in gizmo_carver/default_files/)
     I name the modified file the same as the original one (if you want to keep the original, rename it) so that gizmo_carver scripts below do not need to be fiddled with
 
 8.) Set the input parameters in the file input_gizmo_carver.py in gizmo_carver/src/. Checkout new_fields_list.py because thats where we add column density (in cm**-2) as a yt field.
