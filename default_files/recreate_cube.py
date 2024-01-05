@@ -28,11 +28,11 @@ for i in range(0, ires):
 	for j in range(0, ires):
 		cc[i][j] = (inputs.box_size/res.imag)*3.086e18*np.sum(numh2[i][j])*yt.YTQuantity(1, 'cm**-2')
 
-np.savetxt('numh2.txt', cc, fmt='%e')
+np.savetxt('numh2_'+inputs.snap+'.txt', cc, fmt='%e')
 
 f, ax = plt.subplots(1,1)
 
 im = ax.imshow(np.log10(cc), origin='lower')
 f.colorbar(im)
 
-f.savefig('coldens.png', bbox_inches='tight')
+f.savefig('coldens_'+inputs.snap+'.png', bbox_inches='tight')
