@@ -29,4 +29,4 @@ f, ax = plt.subplots(1,1)
 im = ax.imshow(np.log10(cc), origin='lower')
 f.colorbar(im)
 
-f.savefig('coldens.png', bbox_inches='tight')
+f.savefig(inputs.hdf5_dir+'coldens_'+inputs.snap+'_'+str(inputs.box_size)+'pc.png', bbox_inches='tight')
