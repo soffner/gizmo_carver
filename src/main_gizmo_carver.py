@@ -16,6 +16,7 @@
         Spring 2018
 
    Written/Tested with Python 3.9, yt 4.0.2
+   Further modified by Piyush Sharda to include chemistry with despotic and uclchem (2023)
 """
 
 import yt
@@ -126,6 +127,66 @@ def main_gizmo_carver(box_center=inputs.box_center, snap=inputs.snap, hdf5_dir=i
     CO_J109_dir_name = os.path.join(working_dir_name, 'CO_J109')
     os.mkdir(CO_J109_dir_name)
 
+    CO13_J10_dir_name = os.path.join(working_dir_name, '13CO_J10')
+    os.mkdir(CO13_J10_dir_name)
+
+    CO13_J21_dir_name = os.path.join(working_dir_name, '13CO_J21')
+    os.mkdir(CO13_J21_dir_name)
+
+    CO13_J32_dir_name = os.path.join(working_dir_name, '13CO_J32')
+    os.mkdir(CO13_J32_dir_name)
+
+    CO13_J43_dir_name = os.path.join(working_dir_name, '13CO_J43')
+    os.mkdir(CO13_J43_dir_name)
+
+    CO13_J54_dir_name = os.path.join(working_dir_name, '13CO_J54')
+    os.mkdir(CO13_J54_dir_name)
+
+    CO13_J65_dir_name = os.path.join(working_dir_name, '13CO_J65')
+    os.mkdir(CO13_J65_dir_name)
+
+    CO13_J76_dir_name = os.path.join(working_dir_name, '13CO_J76')
+    os.mkdir(CO13_J76_dir_name)
+
+    CO13_J87_dir_name = os.path.join(working_dir_name, '13CO_J87')
+    os.mkdir(CO13_J87_dir_name)
+
+    CO13_J98_dir_name = os.path.join(working_dir_name, '13CO_J98')
+    os.mkdir(CO13_J98_dir_name)
+
+    CO13_J109_dir_name = os.path.join(working_dir_name, '13CO_J109')
+    os.mkdir(CO13_J109_dir_name)
+
+    C18O_J10_dir_name = os.path.join(working_dir_name, 'C18O_J10')
+    os.mkdir(C18O_J10_dir_name)
+
+    C18O_J21_dir_name = os.path.join(working_dir_name, 'C18O_J21')
+    os.mkdir(C18O_J21_dir_name)
+
+    C18O_J32_dir_name = os.path.join(working_dir_name, 'C18O_J32')
+    os.mkdir(C18O_J32_dir_name)
+
+    C18O_J43_dir_name = os.path.join(working_dir_name, 'C18O_J43')
+    os.mkdir(C18O_J43_dir_name)
+
+    C18O_J54_dir_name = os.path.join(working_dir_name, 'C18O_J54')
+    os.mkdir(C18O_J54_dir_name)
+
+    C18O_J65_dir_name = os.path.join(working_dir_name, 'C18O_J65')
+    os.mkdir(C18O_J65_dir_name)
+
+    C18O_J76_dir_name = os.path.join(working_dir_name, 'C18O_J76')
+    os.mkdir(C18O_J76_dir_name)
+
+    C18O_J87_dir_name = os.path.join(working_dir_name, 'C18O_J87')
+    os.mkdir(C18O_J87_dir_name)
+
+    C18O_J98_dir_name = os.path.join(working_dir_name, 'C18O_J98')
+    os.mkdir(C18O_J98_dir_name)
+
+    C18O_J109_dir_name = os.path.join(working_dir_name, 'C18O_J109')
+    os.mkdir(C18O_J109_dir_name)
+
     HCOp_J10_dir_name = os.path.join(working_dir_name, 'HCOp_J10')
     os.mkdir(HCOp_J10_dir_name)
 
@@ -156,6 +217,36 @@ def main_gizmo_carver(box_center=inputs.box_center, snap=inputs.snap, hdf5_dir=i
     HCOp_J109_dir_name = os.path.join(working_dir_name, 'HCOp_J109')
     os.mkdir(HCOp_J109_dir_name)
 
+    H13COp_J10_dir_name = os.path.join(working_dir_name, 'H13COp_J10')
+    os.mkdir(H13COp_J10_dir_name)
+
+    H13COp_J21_dir_name = os.path.join(working_dir_name, 'H13COp_J21')
+    os.mkdir(H13COp_J21_dir_name)
+
+    H13COp_J32_dir_name = os.path.join(working_dir_name, 'H13COp_J32')
+    os.mkdir(H13COp_J32_dir_name)
+
+    H13COp_J43_dir_name = os.path.join(working_dir_name, 'H13COp_J43')
+    os.mkdir(H13COp_J43_dir_name)
+
+    H13COp_J54_dir_name = os.path.join(working_dir_name, 'H13COp_J54')
+    os.mkdir(H13COp_J54_dir_name)
+
+    H13COp_J65_dir_name = os.path.join(working_dir_name, 'H13COp_J65')
+    os.mkdir(H13COp_J65_dir_name)
+
+    H13COp_J76_dir_name = os.path.join(working_dir_name, 'H13COp_J76')
+    os.mkdir(H13COp_J76_dir_name)
+
+    H13COp_J87_dir_name = os.path.join(working_dir_name, 'H13COp_J87')
+    os.mkdir(H13COp_J87_dir_name)
+
+    H13COp_J98_dir_name = os.path.join(working_dir_name, 'H13COp_J98')
+    os.mkdir(H13COp_J98_dir_name)
+
+    H13COp_J109_dir_name = os.path.join(working_dir_name, 'H13COp_J109')
+    os.mkdir(H13COp_J109_dir_name)
+
     HCN_J10_dir_name = os.path.join(working_dir_name, 'HCN_J10')
     os.mkdir(HCN_J10_dir_name)
 
@@ -185,6 +276,36 @@ def main_gizmo_carver(box_center=inputs.box_center, snap=inputs.snap, hdf5_dir=i
 
     HCN_J109_dir_name = os.path.join(working_dir_name, 'HCN_J109')
     os.mkdir(HCN_J109_dir_name)
+
+    HNC_J10_dir_name = os.path.join(working_dir_name, 'HNC_J10')
+    os.mkdir(HNC_J10_dir_name)
+
+    HNC_J21_dir_name = os.path.join(working_dir_name, 'HNC_J21')
+    os.mkdir(HNC_J21_dir_name)
+
+    HNC_J32_dir_name = os.path.join(working_dir_name, 'HNC_J32')
+    os.mkdir(HNC_J32_dir_name)
+
+    HNC_J43_dir_name = os.path.join(working_dir_name, 'HNC_J43')
+    os.mkdir(HNC_J43_dir_name)
+
+    HNC_J54_dir_name = os.path.join(working_dir_name, 'HNC_J54')
+    os.mkdir(HNC_J54_dir_name)
+
+    HNC_J65_dir_name = os.path.join(working_dir_name, 'HNC_J65')
+    os.mkdir(HNC_J65_dir_name)
+
+    HNC_J76_dir_name = os.path.join(working_dir_name, 'HNC_J76')
+    os.mkdir(HNC_J76_dir_name)
+
+    HNC_J87_dir_name = os.path.join(working_dir_name, 'HNC_J87')
+    os.mkdir(HNC_J87_dir_name)
+
+    HNC_J98_dir_name = os.path.join(working_dir_name, 'HNC_J98')
+    os.mkdir(HNC_J98_dir_name)
+
+    HNC_J109_dir_name = os.path.join(working_dir_name, 'HNC_J109')
+    os.mkdir(HNC_J109_dir_name)
 
 
     # Make a file to store I/O and setup parameters
@@ -228,10 +349,17 @@ def main_gizmo_carver(box_center=inputs.box_center, snap=inputs.snap, hdf5_dir=i
     else:
         #writer.write_line_file(('PartType0', 'CONumberDensityDefault'), os.path.join(new1_dir_name, inputs.out_codefaultname))
         writer.write_line_file(('PartType0', 'CONumberDensityDespotic'), os.path.join(new2_dir_name, inputs.out_codespname))
+        writer.write_line_file(('PartType0', '13CONumberDensityDespotic'), os.path.join(new2_dir_name, inputs.out_13codespname))
+        writer.write_line_file(('PartType0', 'C18ONumberDensityDespotic'), os.path.join(new2_dir_name, inputs.out_c18odespname))
         writer.write_line_file(('PartType0', 'HCOpNumberDensityDespotic'), os.path.join(new2_dir_name, inputs.out_hcopdespname))
+        writer.write_line_file(('PartType0', 'H13COpNumberDensityDespotic'), os.path.join(new2_dir_name, inputs.out_h13copdespname))
         writer.write_line_file(('PartType0', 'CONumberDensityUCLCHEM'), os.path.join(new3_dir_name, inputs.out_couclname))
+        writer.write_line_file(('PartType0', '13CONumberDensityUCLCHEM'), os.path.join(new3_dir_name, inputs.out_13couclname))
+        writer.write_line_file(('PartType0', 'C18ONumberDensityUCLCHEM'), os.path.join(new3_dir_name, inputs.out_c18ouclname))
         writer.write_line_file(('PartType0', 'HCOpNumberDensityUCLCHEM'), os.path.join(new3_dir_name, inputs.out_hcopuclname))
+        writer.write_line_file(('PartType0', 'H13COpNumberDensityUCLCHEM'), os.path.join(new3_dir_name, inputs.out_h13copuclname))
         writer.write_line_file(('PartType0', 'HCNNumberDensityUCLCHEM'), os.path.join(new3_dir_name, inputs.out_hcnuclname))
+        writer.write_line_file(('PartType0', 'HNCNumberDensityUCLCHEM'), os.path.join(new3_dir_name, inputs.out_hncuclname))
 
     #writer.write_line_file(('PartType0', 'H2ColumnDensity'), os.path.join(working_dir_name, inputs.out_NHname))
     writer.write_line_file(('PartType0', 'H2NumDensity'), os.path.join(working_dir_name, inputs.out_nhname))
@@ -245,12 +373,13 @@ def main_gizmo_carver(box_center=inputs.box_center, snap=inputs.snap, hdf5_dir=i
 
     # Write the temperature file for species or dust (slow)
     print("5/7: Writing temperature file (slower..)")
-    print(ds.find_max(("PartType0","gas_temperature_CO")))
+    #print(ds.find_max(("PartType0","gas_temperature_CO")))
     writer.write_line_file(("PartType0", "gas_temperature_CO"), os.path.join(temps_dir_name, inputs.out_tfname_CO))
-    print(ds.find_max(("PartType0","gas_temperature_HCOp")))
+    #print(ds.find_max(("PartType0","gas_temperature_HCOp")))
     writer.write_line_file(("PartType0", "gas_temperature_HCOp"), os.path.join(temps_dir_name, inputs.out_tfname_HCOp))
-    print(ds.find_max(("PartType0","gas_temperature_HCN")))
+    #print(ds.find_max(("PartType0","gas_temperature_HCN")))
     writer.write_line_file(("PartType0", "gas_temperature_HCN"), os.path.join(temps_dir_name, inputs.out_tfname_HCN))
+    writer.write_line_file(("PartType0", "gas_temperature_HNC"), os.path.join(temps_dir_name, inputs.out_tfname_HNC))
 
     # Assuming dust temperature is same as gas for now...
     print("6/7: Writing dust temperature file (slower..)")
@@ -258,7 +387,7 @@ def main_gizmo_carver(box_center=inputs.box_center, snap=inputs.snap, hdf5_dir=i
 
     # Write the gas velocity file (slow x 3)
     print("7/7: Writing velocity file (slowest...)")
-    velocity_fields = ["velocity_x", "velocity_y", "velocity_z"]
+    velocity_fields = [("PartType0","velocity_x"), ("PartType0", "velocity_y"), ("PartType0", "velocity_z")]
     writer.write_line_file(velocity_fields, os.path.join(working_dir_name, inputs.out_vfname))
 
     # Write the wavelength file
@@ -277,6 +406,28 @@ def main_gizmo_carver(box_center=inputs.box_center, snap=inputs.snap, hdf5_dir=i
         writer.writeMolLineFile(os.path.join(CO_J98_dir_name, inputs.out_cwlname_CO_J98), inputs.vmax, inputs.nwav, inputs.restfreq_CO_J98)
         writer.writeMolLineFile(os.path.join(CO_J109_dir_name, inputs.out_cwlname_CO_J109), inputs.vmax, inputs.nwav, inputs.restfreq_CO_J109)
 
+        writer.writeMolLineFile(os.path.join(CO13_J10_dir_name, inputs.out_cwlname_13CO_J10), inputs.vmax, inputs.nwav, inputs.restfreq_13CO_J10)
+        writer.writeMolLineFile(os.path.join(CO13_J21_dir_name, inputs.out_cwlname_13CO_J21), inputs.vmax, inputs.nwav, inputs.restfreq_13CO_J21)
+        writer.writeMolLineFile(os.path.join(CO13_J32_dir_name, inputs.out_cwlname_13CO_J32), inputs.vmax, inputs.nwav, inputs.restfreq_13CO_J32)
+        writer.writeMolLineFile(os.path.join(CO13_J43_dir_name, inputs.out_cwlname_13CO_J43), inputs.vmax, inputs.nwav, inputs.restfreq_13CO_J43)
+        writer.writeMolLineFile(os.path.join(CO13_J54_dir_name, inputs.out_cwlname_13CO_J54), inputs.vmax, inputs.nwav, inputs.restfreq_13CO_J54)
+        writer.writeMolLineFile(os.path.join(CO13_J65_dir_name, inputs.out_cwlname_13CO_J65), inputs.vmax, inputs.nwav, inputs.restfreq_13CO_J65)
+        writer.writeMolLineFile(os.path.join(CO13_J76_dir_name, inputs.out_cwlname_13CO_J76), inputs.vmax, inputs.nwav, inputs.restfreq_13CO_J76)
+        writer.writeMolLineFile(os.path.join(CO13_J87_dir_name, inputs.out_cwlname_13CO_J87), inputs.vmax, inputs.nwav, inputs.restfreq_13CO_J87)
+        writer.writeMolLineFile(os.path.join(CO13_J98_dir_name, inputs.out_cwlname_13CO_J98), inputs.vmax, inputs.nwav, inputs.restfreq_13CO_J98)
+        writer.writeMolLineFile(os.path.join(CO13_J109_dir_name, inputs.out_cwlname_13CO_J109), inputs.vmax, inputs.nwav, inputs.restfreq_13CO_J109)
+
+        writer.writeMolLineFile(os.path.join(C18O_J10_dir_name, inputs.out_cwlname_C18O_J10), inputs.vmax, inputs.nwav, inputs.restfreq_C18O_J10)
+        writer.writeMolLineFile(os.path.join(C18O_J21_dir_name, inputs.out_cwlname_C18O_J21), inputs.vmax, inputs.nwav, inputs.restfreq_C18O_J21)
+        writer.writeMolLineFile(os.path.join(C18O_J32_dir_name, inputs.out_cwlname_C18O_J32), inputs.vmax, inputs.nwav, inputs.restfreq_C18O_J32)
+        writer.writeMolLineFile(os.path.join(C18O_J43_dir_name, inputs.out_cwlname_C18O_J43), inputs.vmax, inputs.nwav, inputs.restfreq_C18O_J43)
+        writer.writeMolLineFile(os.path.join(C18O_J54_dir_name, inputs.out_cwlname_C18O_J54), inputs.vmax, inputs.nwav, inputs.restfreq_C18O_J54)
+        writer.writeMolLineFile(os.path.join(C18O_J65_dir_name, inputs.out_cwlname_C18O_J65), inputs.vmax, inputs.nwav, inputs.restfreq_C18O_J65)
+        writer.writeMolLineFile(os.path.join(C18O_J76_dir_name, inputs.out_cwlname_C18O_J76), inputs.vmax, inputs.nwav, inputs.restfreq_C18O_J76)
+        writer.writeMolLineFile(os.path.join(C18O_J87_dir_name, inputs.out_cwlname_C18O_J87), inputs.vmax, inputs.nwav, inputs.restfreq_C18O_J87)
+        writer.writeMolLineFile(os.path.join(C18O_J98_dir_name, inputs.out_cwlname_C18O_J98), inputs.vmax, inputs.nwav, inputs.restfreq_C18O_J98)
+        writer.writeMolLineFile(os.path.join(C18O_J109_dir_name, inputs.out_cwlname_C18O_J109), inputs.vmax, inputs.nwav, inputs.restfreq_C18O_J109)
+
         writer.writeMolLineFile(os.path.join(HCOp_J10_dir_name, inputs.out_cwlname_HCOp_J10), inputs.vmax, inputs.nwav, inputs.restfreq_HCOp_J10)
         writer.writeMolLineFile(os.path.join(HCOp_J21_dir_name, inputs.out_cwlname_HCOp_J21), inputs.vmax, inputs.nwav, inputs.restfreq_HCOp_J21)
         writer.writeMolLineFile(os.path.join(HCOp_J32_dir_name, inputs.out_cwlname_HCOp_J32), inputs.vmax, inputs.nwav, inputs.restfreq_HCOp_J32)
@@ -287,6 +438,17 @@ def main_gizmo_carver(box_center=inputs.box_center, snap=inputs.snap, hdf5_dir=i
         writer.writeMolLineFile(os.path.join(HCOp_J87_dir_name, inputs.out_cwlname_HCOp_J87), inputs.vmax, inputs.nwav, inputs.restfreq_HCOp_J87)
         writer.writeMolLineFile(os.path.join(HCOp_J98_dir_name, inputs.out_cwlname_HCOp_J98), inputs.vmax, inputs.nwav, inputs.restfreq_HCOp_J98)
         writer.writeMolLineFile(os.path.join(HCOp_J109_dir_name, inputs.out_cwlname_HCOp_J109), inputs.vmax, inputs.nwav, inputs.restfreq_HCOp_J109)
+
+        writer.writeMolLineFile(os.path.join(H13COp_J10_dir_name, inputs.out_cwlname_H13COp_J10), inputs.vmax, inputs.nwav, inputs.restfreq_H13COp_J10)
+        writer.writeMolLineFile(os.path.join(H13COp_J21_dir_name, inputs.out_cwlname_H13COp_J21), inputs.vmax, inputs.nwav, inputs.restfreq_H13COp_J21)
+        writer.writeMolLineFile(os.path.join(H13COp_J32_dir_name, inputs.out_cwlname_H13COp_J32), inputs.vmax, inputs.nwav, inputs.restfreq_H13COp_J32)
+        writer.writeMolLineFile(os.path.join(H13COp_J43_dir_name, inputs.out_cwlname_H13COp_J43), inputs.vmax, inputs.nwav, inputs.restfreq_H13COp_J43)
+        writer.writeMolLineFile(os.path.join(H13COp_J54_dir_name, inputs.out_cwlname_H13COp_J54), inputs.vmax, inputs.nwav, inputs.restfreq_H13COp_J54)
+        writer.writeMolLineFile(os.path.join(H13COp_J65_dir_name, inputs.out_cwlname_H13COp_J65), inputs.vmax, inputs.nwav, inputs.restfreq_H13COp_J65)
+        writer.writeMolLineFile(os.path.join(H13COp_J76_dir_name, inputs.out_cwlname_H13COp_J76), inputs.vmax, inputs.nwav, inputs.restfreq_H13COp_J76)
+        writer.writeMolLineFile(os.path.join(H13COp_J87_dir_name, inputs.out_cwlname_H13COp_J87), inputs.vmax, inputs.nwav, inputs.restfreq_H13COp_J87)
+        writer.writeMolLineFile(os.path.join(H13COp_J98_dir_name, inputs.out_cwlname_H13COp_J98), inputs.vmax, inputs.nwav, inputs.restfreq_H13COp_J98)
+        writer.writeMolLineFile(os.path.join(H13COp_J109_dir_name, inputs.out_cwlname_H13COp_J109), inputs.vmax, inputs.nwav, inputs.restfreq_H13COp_J109)
 
         writer.writeMolLineFile(os.path.join(HCN_J10_dir_name, inputs.out_cwlname_HCN_J10), inputs.vmax, inputs.nwav, inputs.restfreq_HCN_J10)
         writer.writeMolLineFile(os.path.join(HCN_J21_dir_name, inputs.out_cwlname_HCN_J21), inputs.vmax, inputs.nwav, inputs.restfreq_HCN_J21)
@@ -299,6 +461,17 @@ def main_gizmo_carver(box_center=inputs.box_center, snap=inputs.snap, hdf5_dir=i
         writer.writeMolLineFile(os.path.join(HCN_J98_dir_name, inputs.out_cwlname_HCN_J98), inputs.vmax, inputs.nwav, inputs.restfreq_HCN_J98)
         writer.writeMolLineFile(os.path.join(HCN_J109_dir_name, inputs.out_cwlname_HCN_J109), inputs.vmax, inputs.nwav, inputs.restfreq_HCN_J109)
 
+        writer.writeMolLineFile(os.path.join(HNC_J10_dir_name, inputs.out_cwlname_HNC_J10), inputs.vmax, inputs.nwav, inputs.restfreq_HNC_J10)
+        writer.writeMolLineFile(os.path.join(HNC_J21_dir_name, inputs.out_cwlname_HNC_J21), inputs.vmax, inputs.nwav, inputs.restfreq_HNC_J21)
+        writer.writeMolLineFile(os.path.join(HNC_J32_dir_name, inputs.out_cwlname_HNC_J32), inputs.vmax, inputs.nwav, inputs.restfreq_HNC_J32)
+        writer.writeMolLineFile(os.path.join(HNC_J43_dir_name, inputs.out_cwlname_HNC_J43), inputs.vmax, inputs.nwav, inputs.restfreq_HNC_J43)
+        writer.writeMolLineFile(os.path.join(HNC_J54_dir_name, inputs.out_cwlname_HNC_J54), inputs.vmax, inputs.nwav, inputs.restfreq_HNC_J54)
+        writer.writeMolLineFile(os.path.join(HNC_J65_dir_name, inputs.out_cwlname_HNC_J65), inputs.vmax, inputs.nwav, inputs.restfreq_HNC_J65)
+        writer.writeMolLineFile(os.path.join(HNC_J76_dir_name, inputs.out_cwlname_HNC_J76), inputs.vmax, inputs.nwav, inputs.restfreq_HNC_J76)
+        writer.writeMolLineFile(os.path.join(HNC_J87_dir_name, inputs.out_cwlname_HNC_J87), inputs.vmax, inputs.nwav, inputs.restfreq_HNC_J87)
+        writer.writeMolLineFile(os.path.join(HNC_J98_dir_name, inputs.out_cwlname_HNC_J98), inputs.vmax, inputs.nwav, inputs.restfreq_HNC_J98)
+        writer.writeMolLineFile(os.path.join(HNC_J109_dir_name, inputs.out_cwlname_HNC_J109), inputs.vmax, inputs.nwav, inputs.restfreq_HNC_J109)
+
     else:
         print("Copying exisiting line file ...")
         shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_cwlname), working_dir_name)
@@ -306,12 +479,20 @@ def main_gizmo_carver(box_center=inputs.box_center, snap=inputs.snap, hdf5_dir=i
     # Copy over existing files
     print('Copying default files...')
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_molname_CO), working_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_molname_13CO), working_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_molname_C18O), working_dir_name)
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_molname_HCOp), working_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_molname_H13COp), working_dir_name)
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_molname_HCN), working_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_molname_HNC), working_dir_name)
 
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_linesname_CO), lines_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_linesname_13CO), lines_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_linesname_C18O), lines_dir_name)
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_linesname_HCOp), lines_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_linesname_H13COp), lines_dir_name)
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_linesname_HCN), lines_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_linesname_HNC), lines_dir_name)
 
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_wlmname), working_dir_name)
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_dksname), working_dir_name)
@@ -320,8 +501,12 @@ def main_gizmo_carver(box_center=inputs.box_center, snap=inputs.snap, hdf5_dir=i
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_execute), working_dir_name)
 
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_jobscript_CO), working_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_jobscript_13CO), working_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_jobscript_C18O), working_dir_name)
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_jobscript_HCOp), working_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_jobscript_H13COp), working_dir_name)
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_jobscript_HCN), working_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_jobscript_HNC), working_dir_name)
 
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_extra1), working_dir_name)
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_extra2), working_dir_name)

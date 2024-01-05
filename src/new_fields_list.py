@@ -28,6 +28,9 @@ def _gas_temp_HCOp(field, data):
 def _gas_temp_HCN(field, data):
     return data[('PartType0', 'Temperature')] * yt.YTQuantity(1, 'K') * ( data[('PartType0','Temperature')] < yt.YTArray([500], 'K') ) #500 is the max temp available in HCN lamda leiden collision rates files
 
+def _gas_temp_HNC(field, data):
+    return data[('PartType0', 'Temperature')] * yt.YTQuantity(1, 'K') * ( data[('PartType0','Temperature')] < yt.YTArray([500], 'K') ) #500 is the max temp available in HNC lamda leiden collision rates files
+
 # Definition of the target species field. Uses info from inputs
 def _H2NumDensity(field, data):
     return data[('PartType0', 'Density')].to('g/cm**3')*data[('PartType0', 'MolecularMassFraction')]*data[('PartType0', 'NeutralHydrogenAbundance')]*(1-inputs.helium_mass_fraction)/(inputs.mol_hydrogen_ratio*yt.YTQuantity(mh, 'g'))
@@ -65,27 +68,57 @@ def _CONumberDensityDespotic(field, data):
     co_numdens = data[('PartType0', 'CONumDensityDespotic')] * yt.YTQuantity(1, 'cm**-3')
     return co_numdens
 
+def _13CONumberDensityDespotic(field, data):
+    co_numdens = data[('PartType0', 'CONumDensityDespotic')] * yt.YTQuantity(1, 'cm**-3') * inputs.c13_over_c12
+    return co_numdens
+
+def _C18ONumberDensityDespotic(field, data):
+    co_numdens = data[('PartType0', 'CONumDensityDespotic')] * yt.YTQuantity(1, 'cm**-3') * inputs.o18_over_o16
+    return co_numdens
+
 def _HCOpNumberDensityDespotic(field, data):
     hcop_numdens = data[('PartType0', 'HCOpNumDensityDespotic')] * yt.YTQuantity(1, 'cm**-3')
     return hcop_numdens
 
+def _H13COpNumberDensityDespotic(field, data):
+    hcop_numdens = data[('PartType0', 'HCOpNumDensityDespotic')] * yt.YTQuantity(1, 'cm**-3') * inputs.c13_over_c12
+    return hcop_numdens
+
+
 def _CONumberDensityUCLCHEM(field, data):
     co_numdens = data[('PartType0', 'CONumDensityUCLCHEM')] * yt.YTQuantity(1, 'cm**-3')
+    return co_numdens
+
+def _13CONumberDensityUCLCHEM(field, data):
+    co_numdens = data[('PartType0', 'CONumDensityUCLCHEM')] * yt.YTQuantity(1, 'cm**-3') * inputs.c13_over_c12
+    return co_numdens
+
+def _C18ONumberDensityUCLCHEM(field, data):
+    co_numdens = data[('PartType0', 'CONumDensityUCLCHEM')] * yt.YTQuantity(1, 'cm**-3') * inputs.o18_over_o16
     return co_numdens
 
 def _HCOpNumberDensityUCLCHEM(field, data):
     hcop_numdens = data[('PartType0', 'HCOpNumDensityUCLCHEM')] * yt.YTQuantity(1, 'cm**-3')
     return hcop_numdens
 
+def _H13COpNumberDensityUCLCHEM(field, data):
+    hcop_numdens = data[('PartType0', 'HCOpNumDensityUCLCHEM')] * yt.YTQuantity(1, 'cm**-3') * inputs.c13_over_c12
+    return hcop_numdens
+
 def _HCNNumberDensityUCLCHEM(field, data):
     hcn_numdens = data[('PartType0', 'HCNNumDensityUCLCHEM')] * yt.YTQuantity(1, 'cm**-3')
     return hcn_numdens
 
+def _HNCNumberDensityUCLCHEM(field, data):
+    hnc_numdens = data[('PartType0', 'HNCNumDensityUCLCHEM')] * yt.YTQuantity(1, 'cm**-3')
+    return hnc_numdens
+
 # Definition of the microturbulence at each point. Uses info from inputs
 def _MicroTurb(field, data):
     turb = data['PartType0', 'velocity_x']
-    #use the sizd linewidth relation: lw = 0.72 * (size/1pc)**0.56 km/s; size is of the regridded cell
-    microturbulence_speed = 0.72 * ((2*inputs.box_size)/inputs.box_dim.imag)**0.56 * 1e5 #cgs
+    # use the sizd linewidth relation: lw = 0.72 * (size/1pc)**0.56 km/s; size is of the regridded cell
+    # equation 26 of McKee and Ostriker 2007
+    microturbulence_speed = 0.72 * ((2*inputs.box_size)/inputs.box_dim.imag)**0.50 * 1e5 #cgs
     print('Microturbulence speed is ', microturbulence_speed/1e5, ' km/s')
     turb[turb>=0] = yt.YTQuantity(microturbulence_speed, "cm/s")
     turb[turb<=0] = yt.YTQuantity(microturbulence_speed, "cm/s")
@@ -113,6 +146,7 @@ def _Mask(field, data):
 yt.add_field(("PartType0", "gas_temperature_CO"), function=_gas_temp_CO, units="K", sampling_type='particle', force_override=True)
 yt.add_field(("PartType0", "gas_temperature_HCOp"), function=_gas_temp_HCOp, units="K", sampling_type='particle', force_override=True)
 yt.add_field(("PartType0", "gas_temperature_HCN"), function=_gas_temp_HCN, units="K", sampling_type='particle', force_override=True)
+yt.add_field(("PartType0", "gas_temperature_HNC"), function=_gas_temp_HNC, units="K", sampling_type='particle', force_override=True)
 
 yt.add_field(("PartType0", "dust_temperature"), function=_DustTemperature, units="K", sampling_type='particle', force_override=True)
 
@@ -125,14 +159,21 @@ yt.add_field(('PartType0', 'H2NumDensity'), function=_H2NumDensity, units='cm**-
 #yt.add_field(('PartType0', 'CONumberDensityDefault'), function=_CONumberDensityDefault, units='cm**-3', sampling_type='particle', force_override=True)
 
 yt.add_field(('PartType0', 'CONumberDensityDespotic'), function=_CONumberDensityDespotic, units='cm**-3', sampling_type='particle', force_override=True)
+yt.add_field(('PartType0', '13CONumberDensityDespotic'), function=_13CONumberDensityDespotic, units='cm**-3', sampling_type='particle', force_override=True)
+yt.add_field(('PartType0', 'C18ONumberDensityDespotic'), function=_C18ONumberDensityDespotic, units='cm**-3', sampling_type='particle', force_override=True)
 
 yt.add_field(('PartType0', 'HCOpNumberDensityDespotic'), function=_HCOpNumberDensityDespotic, units='cm**-3', sampling_type='particle', force_override=True)
+yt.add_field(('PartType0', 'H13COpNumberDensityDespotic'), function=_H13COpNumberDensityDespotic, units='cm**-3', sampling_type='particle', force_override=True)
 
 yt.add_field(('PartType0', 'CONumberDensityUCLCHEM'), function=_CONumberDensityUCLCHEM, units='cm**-3', sampling_type='particle', force_override=True)
+yt.add_field(('PartType0', '13CONumberDensityUCLCHEM'), function=_13CONumberDensityUCLCHEM, units='cm**-3', sampling_type='particle', force_override=True)
+yt.add_field(('PartType0', 'C18ONumberDensityUCLCHEM'), function=_C18ONumberDensityUCLCHEM, units='cm**-3', sampling_type='particle', force_override=True)
 
 yt.add_field(('PartType0', 'HCOpNumberDensityUCLCHEM'), function=_HCOpNumberDensityUCLCHEM, units='cm**-3', sampling_type='particle', force_override=True)
+yt.add_field(('PartType0', 'H13COpNumberDensityUCLCHEM'), function=_H13COpNumberDensityUCLCHEM, units='cm**-3', sampling_type='particle', force_override=True)
 
 yt.add_field(('PartType0', 'HCNNumberDensityUCLCHEM'), function=_HCNNumberDensityUCLCHEM, units='cm**-3', sampling_type='particle', force_override=True)
+yt.add_field(('PartType0', 'HNCNumberDensityUCLCHEM'), function=_HNCNumberDensityUCLCHEM, units='cm**-3', sampling_type='particle', force_override=True)
 
 yt.add_field(("PartType0", "microturbulence_speed"), function=_MicroTurb, units="cm/s", sampling_type='particle', force_override=True)
 
