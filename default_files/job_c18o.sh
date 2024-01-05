@@ -12,10 +12,10 @@
 #PBS -M u6645980@alumni.anu.edu.au
 
 #to write levelpop_co.dat, include writepop keyword: radmc3d image npix 256 loadlambda fluxcons doppcatch inclline linelist nostar writepop sizepc 5.0 phi 0 incl 0 | tee output.txt
-sizepc = 1.0
-phi = 0
-incl = 0
-npix = 256
+sizepc=5.0
+phi=0
+incl=0
+npix=256
 
 #get lines.inp file for C18O
 cp -p lines/lines_c18o.inp .
@@ -51,7 +51,7 @@ mv camera_wavelength_micron_C18OJ32.inp camera_wavelength_micron.inp
 radmc3d image npix $npix loadlambda fluxcons doppcatch inclline linelist nostar sizepc $sizepc phi $phi incl $incl | tee output_C18O_despotic_J32.txt
 mv image.out image_C18O_despotic_J32.out
 mv image_C18O_despotic_J32.out despotic/
-mv output_CO_despotic_J32.txt despotic/
+mv output_C18O_despotic_J32.txt despotic/
 
 #CO UCLCHEM
 cp -p uclchem/numberdens_C18O_uclchem.inp .

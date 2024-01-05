@@ -12,10 +12,10 @@
 #PBS -M u6645980@alumni.anu.edu.au
 
 #to write levelpop_co.dat, include writepop keyword: radmc3d image npix 256 loadlambda fluxcons doppcatch inclline linelist nostar writepop sizepc 5.0 phi 0 incl 0 | tee output.txt
-sizepc = 5.0
-phi = 0
-incl = 0
-npix = 256
+sizepc=5.0
+phi=0
+incl=0
+npix=256
 
 #get lines.inp file for HCN
 cp -p lines/lines_hcn.inp .
