@@ -222,7 +222,7 @@ arr_5 = np.array(dd['PartType0', 'MolecularMassFraction']*dd['PartType0', 'Neutr
 
 #preparing for despotic and uclchem analyses
 nharray = np.sort(np.concatenate((np.logspace(2, 7, 15), np.logspace(1, 1.7, 3))))
-NHarray = np.sort(np.concatenate((np.logspace(19, 23, 10), np.array([3.16e23, 1e24]))))
+NHarray = np.sort(np.concatenate((np.logspace(19, 23, 10), np.array([3.16e23, 1e24, 3.16e24, 1e25]))))
 Tgarray = np.logspace(np.log10(5.0), np.log10(5e3), 4)
 isrfarray = np.logspace(np.log10(1.0), np.log10(5e3), 4)
 xH2array = np.logspace(-3, np.log10(0.5), 4)
@@ -338,7 +338,7 @@ uclout_hnc  = np.zeros((len(nharray), len(NHarray_new), len(Tgarray_new), len(is
 
 #import uclchem output
 uclout_co = np.loadtxt(ucl_path+'uclout_5D_CO.txt', delimiter=',')
-uclout_hcop = np.loadtxt(ucl_path+'uclout_5D_HCO+.txt', delimiter=',')
+uclout_hcop = np.loadtxt(ucl_path+'uclout_5D_HCOp.txt', delimiter=',')
 uclout_hcn = np.loadtxt(ucl_path+'uclout_5D_HCN.txt', delimiter=',')
 uclout_hnc = np.loadtxt(ucl_path+'uclout_5D_HNC.txt', delimiter=',')
 
