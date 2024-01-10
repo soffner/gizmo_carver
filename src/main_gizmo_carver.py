@@ -82,8 +82,8 @@ def main_gizmo_carver(box_center=inputs.box_center, snap=inputs.snap, hdf5_dir=i
     working_dir_name = os.path.join(current_dir, 'RADMC_inputs_' + tag+dt_string)
     os.mkdir(working_dir_name)
 
-    #new1_dir_name = os.path.join(working_dir_name, 'default')
-    #os.mkdir(new1_dir_name)
+    new1_dir_name = os.path.join(working_dir_name, 'default')
+    os.mkdir(new1_dir_name)
 
     new2_dir_name = os.path.join(working_dir_name, 'despotic')
     os.mkdir(new2_dir_name)
@@ -347,7 +347,7 @@ def main_gizmo_carver(box_center=inputs.box_center, snap=inputs.snap, hdf5_dir=i
     if inputs.mask_abundance == True:
         writer.write_line_file(('PartType0', 'MaskedMolecularNumDensity'), os.path.join(working_dir_name, inputs.out_nfname))
     else:
-        #writer.write_line_file(('PartType0', 'CONumberDensityDefault'), os.path.join(new1_dir_name, inputs.out_codefaultname))
+        writer.write_line_file(('PartType0', 'CONumberDensityDefault'), os.path.join(new1_dir_name, inputs.out_codefaultname))
         writer.write_line_file(('PartType0', 'CONumberDensityDespotic'), os.path.join(new2_dir_name, inputs.out_codespname))
         writer.write_line_file(('PartType0', '13CONumberDensityDespotic'), os.path.join(new2_dir_name, inputs.out_13codespname))
         writer.write_line_file(('PartType0', 'C18ONumberDensityDespotic'), os.path.join(new2_dir_name, inputs.out_c18odespname))

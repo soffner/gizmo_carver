@@ -29,7 +29,7 @@ gamma = 5.0/3.0 # Note gamma is not constant and this function is an approximati
 helium_mass_fraction = 0.284 # Default mass fraction in Gizmo
 
 # number fraction of target species
-# molecular_abundance = 10**-4 # abundance of CO relative to H2
+molecular_abundance = 10**-4 # abundance of CO relative to H2
 
 # ratio of 13C to 12C isotopes
 c13_over_c12 = 1./50.
@@ -49,7 +49,7 @@ box_center = [48.55052441, 47.38566334, 49.65661156] #[49.52588194, 49.16974805,
 # Routine will generate input files for a square area centered at box_center 
 # extending to box_center += box_size on each side
 # Use same units as box_units
-box_size = 5.0 # pc (=L/2)
+box_size = 1.0 # pc (=L/2)
 
 # Resolution of the resulting image (give as a complex number, e.g. for 
 # box_dim = 64j, the resulting image will be 64x64)
@@ -173,7 +173,7 @@ restfreq_HNC_J109 = 906.24045900e9
 
 # Output file names for use in RADMC3D
 out_afname = "amr_grid.inp"       # output file name for amr grid
-#out_codefaultname = "numberdens_CO_default.inp" # output file name for target species above
+out_codefaultname = "numberdens_CO_default.inp" # output file name for target species above
 out_codespname = "numberdens_CO_despotic.inp" # output file name for target species (with despotic chemistry) above
 out_couclname = "numberdens_CO_uclchem.inp" # output file name for target species (with UCLCHEM chemistry) above
 out_13codespname = "numberdens_13CO_despotic.inp"
@@ -195,7 +195,7 @@ out_vfname = "gas_velocity.inp"   # output file name for velocity
 out_tfname_CO = "gas_temperature_CO.inp"    # output file name for temperature
 out_tfname_HCOp = "gas_temperature_HCOp.inp"
 out_tfname_HCN = "gas_temperature_HCN.inp"
-out_tfname_HCN = "gas_temperature_HNC.inp"
+out_tfname_HNC = "gas_temperature_HNC.inp"
 
 out_ddfname = "dust_density.inp" # output file name for dust density
 out_dtfname = "dust_temperature.dat" # output for dust temperature (requires .dat)

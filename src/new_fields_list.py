@@ -40,8 +40,8 @@ def _H2ColumnDensity(field, data):
     return nh
 
 # Definition of the target species field. Uses info from inputs
-#def _CONumberDensityDefault(field, data):
-#    return data[('PartType0', 'H2NumDensity')].to('cm**-3')*inputs.molecular_abundance*(data[('PartType0','H2NumDensity')].to('cm**-3') > yt.YTArray([1e2], "cm**-3"))*( data[('PartType0','gas_temperature_CO')] < yt.YTArray([1e2], "K"))
+def _CONumberDensityDefault(field, data):
+    return data[('PartType0', 'H2NumDensity')].to('cm**-3')*inputs.molecular_abundance*(data[('PartType0','H2NumDensity')].to('cm**-3') > yt.YTArray([1e2], "cm**-3"))*( data[('PartType0','gas_temperature_CO')] < yt.YTArray([1e2], "K"))
 
 # Definition of the target species field based on despotic chemistry. Uses info from inputs and a 9th degree polynomial (for CO)
 # ONLY FOR CO!!!
@@ -64,54 +64,57 @@ def _H2ColumnDensity(field, data):
     #co_numdens[badcells] = 0
 #    return co_numdens
 
+#NOTE!! CHECK AND ENSURE ALL THE DESPOTIC AND UCLCHEM ABUNDANCES ARE WRT H AND NOT H2
+
 def _CONumberDensityDespotic(field, data):
-    co_numdens = data[('PartType0', 'CONumDensityDespotic')] * yt.YTQuantity(1, 'cm**-3')
+    co_numdens = data[('PartType0', 'COAbundDespotic')] * data[('PartType0', 'Density')].to('g/cm**3') / (inputs.mol_hydrogen_ratio*yt.YTQuantity(mh, 'g'))
     return co_numdens
 
 def _13CONumberDensityDespotic(field, data):
-    co_numdens = data[('PartType0', 'CONumDensityDespotic')] * yt.YTQuantity(1, 'cm**-3') * inputs.c13_over_c12
+    co_numdens = data[('PartType0', 'COAbundDespotic')] * inputs.c13_over_c12 * data[('PartType0', 'Density')].to('g/cm**3') / (inputs.mol_hydrogen_ratio*yt.YTQuantity(mh, 'g'))
     return co_numdens
 
 def _C18ONumberDensityDespotic(field, data):
-    co_numdens = data[('PartType0', 'CONumDensityDespotic')] * yt.YTQuantity(1, 'cm**-3') * inputs.o18_over_o16
+    co_numdens = data[('PartType0', 'COAbundDespotic')] * inputs.o18_over_o16 * data[('PartType0', 'Density')].to('g/cm**3') / (inputs.mol_hydrogen_ratio*yt.YTQuantity(mh, 'g'))
     return co_numdens
 
 def _HCOpNumberDensityDespotic(field, data):
-    hcop_numdens = data[('PartType0', 'HCOpNumDensityDespotic')] * yt.YTQuantity(1, 'cm**-3')
+    hcop_numdens = data[('PartType0', 'HCOpAbundDespotic')] * data[('PartType0', 'Density')].to('g/cm**3') / (inputs.mol_hydrogen_ratio*yt.YTQuantity(mh, 'g'))
     return hcop_numdens
 
 def _H13COpNumberDensityDespotic(field, data):
-    hcop_numdens = data[('PartType0', 'HCOpNumDensityDespotic')] * yt.YTQuantity(1, 'cm**-3') * inputs.c13_over_c12
+    hcop_numdens = data[('PartType0', 'HCOpAbundDespotic')] * inputs.c13_over_c12 * data[('PartType0', 'Density')].to('g/cm**3') / (inputs.mol_hydrogen_ratio*yt.YTQuantity(mh, 'g'))
     return hcop_numdens
-
+ 
 
 def _CONumberDensityUCLCHEM(field, data):
-    co_numdens = data[('PartType0', 'CONumDensityUCLCHEM')] * yt.YTQuantity(1, 'cm**-3')
+    co_numdens = data[('PartType0', 'COAbundUCLCHEM')] * data[('PartType0', 'Density')].to('g/cm**3') / (inputs.mol_hydrogen_ratio*yt.YTQuantity(mh, 'g'))
     return co_numdens
 
 def _13CONumberDensityUCLCHEM(field, data):
-    co_numdens = data[('PartType0', 'CONumDensityUCLCHEM')] * yt.YTQuantity(1, 'cm**-3') * inputs.c13_over_c12
+    co_numdens = data[('PartType0', 'COAbundUCLCHEM')] * inputs.c13_over_c12 * data[('PartType0', 'Density')].to('g/cm**3') / (inputs.mol_hydrogen_ratio*yt.YTQuantity(mh, 'g'))
     return co_numdens
 
 def _C18ONumberDensityUCLCHEM(field, data):
-    co_numdens = data[('PartType0', 'CONumDensityUCLCHEM')] * yt.YTQuantity(1, 'cm**-3') * inputs.o18_over_o16
+    co_numdens = data[('PartType0', 'COAbundUCLCHEM')] * inputs.o18_over_o16 * data[('PartType0', 'Density')].to('g/cm**3') / (inputs.mol_hydrogen_ratio*yt.YTQuantity(mh, 'g'))
     return co_numdens
 
 def _HCOpNumberDensityUCLCHEM(field, data):
-    hcop_numdens = data[('PartType0', 'HCOpNumDensityUCLCHEM')] * yt.YTQuantity(1, 'cm**-3')
+    hcop_numdens = data[('PartType0', 'HCOpAbundUCLCHEM')] * data[('PartType0', 'Density')].to('g/cm**3') / (inputs.mol_hydrogen_ratio*yt.YTQuantity(mh, 'g'))
     return hcop_numdens
 
 def _H13COpNumberDensityUCLCHEM(field, data):
-    hcop_numdens = data[('PartType0', 'HCOpNumDensityUCLCHEM')] * yt.YTQuantity(1, 'cm**-3') * inputs.c13_over_c12
+    hcop_numdens = data[('PartType0', 'HCOpAbundUCLCHEM')] * inputs.c13_over_c12 * data[('PartType0', 'Density')].to('g/cm**3') / (inputs.mol_hydrogen_ratio*yt.YTQuantity(mh, 'g'))
     return hcop_numdens
 
 def _HCNNumberDensityUCLCHEM(field, data):
-    hcn_numdens = data[('PartType0', 'HCNNumDensityUCLCHEM')] * yt.YTQuantity(1, 'cm**-3')
+    hcn_numdens = data[('PartType0', 'HCNAbundUCLCHEM')] * data[('PartType0', 'Density')].to('g/cm**3') / (inputs.mol_hydrogen_ratio*yt.YTQuantity(mh, 'g'))
     return hcn_numdens
 
 def _HNCNumberDensityUCLCHEM(field, data):
-    hnc_numdens = data[('PartType0', 'HNCNumDensityUCLCHEM')] * yt.YTQuantity(1, 'cm**-3')
+    hnc_numdens = data[('PartType0', 'HNCAbundUCLCHEM')] * data[('PartType0', 'Density')].to('g/cm**3') / (inputs.mol_hydrogen_ratio*yt.YTQuantity(mh, 'g'))
     return hnc_numdens
+
 
 # Definition of the microturbulence at each point. Uses info from inputs
 def _MicroTurb(field, data):
@@ -156,7 +159,7 @@ yt.add_field(('PartType0', 'H2ColumnDensity'), function=_H2ColumnDensity, units=
 
 yt.add_field(('PartType0', 'H2NumDensity'), function=_H2NumDensity, units='cm**-3', sampling_type='particle', force_override=True)
 
-#yt.add_field(('PartType0', 'CONumberDensityDefault'), function=_CONumberDensityDefault, units='cm**-3', sampling_type='particle', force_override=True)
+yt.add_field(('PartType0', 'CONumberDensityDefault'), function=_CONumberDensityDefault, units='cm**-3', sampling_type='particle', force_override=True)
 
 yt.add_field(('PartType0', 'CONumberDensityDespotic'), function=_CONumberDensityDespotic, units='cm**-3', sampling_type='particle', force_override=True)
 yt.add_field(('PartType0', '13CONumberDensityDespotic'), function=_13CONumberDensityDespotic, units='cm**-3', sampling_type='particle', force_override=True)
