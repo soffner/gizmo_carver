@@ -21,33 +21,33 @@ if 'H2ColDensity' in f['/PartType0']:
 	del f['/PartType0/H2ColDensity']
 	print('Deleted existing dataset H2ColDensity')
 
-if 'CONumDensity' in f['/PartType0']:
-	del f['/PartType0/CONumDensity']
-	print('Deleted existing dataset CONumDensity')
+if 'COAbund' in f['/PartType0']:
+        del f['/PartType0/COAbund']
+        print('Deleted existing dataset COAbund')
 
-if 'CONumDensityDespotic' in f['/PartType0']:
-        del f['/PartType0/CONumDensityDespotic']
-        print('Deleted existing dataset CONumDensityDespotic')
+if 'COAbundDespotic' in f['/PartType0']:
+        del f['/PartType0/COAbundDespotic']
+        print('Deleted existing dataset COAbundDespotic')
 
-if 'CONumDensityUCLCHEM' in f['/PartType0']:
-        del f['/PartType0/CONumDensityUCLCHEM']
-        print('Deleted existing dataset CONumDensityUCLCHEM')
+if 'COAbundUCLCHEM' in f['/PartType0']:
+        del f['/PartType0/COAbundUCLCHEM']
+        print('Deleted existing dataset COAbundUCLCHEM')
 
-if 'HCOpNumDensityDespotic' in f['/PartType0']:
-           del f['/PartType0/HCOpNumDensityDespotic']
-           print('Deleted existing dataset HCOpNumDensityDespotic')
+if 'HCOpAbundDespotic' in f['/PartType0']:
+           del f['/PartType0/HCOpAbundDespotic']
+           print('Deleted existing dataset HCOpAbundDespotic')
 
-if 'HCOpNumDensityUCLCHEM' in f['/PartType0']:
-        del f['/PartType0/HCOpNumDensityUCLCHEM']
-        print('Deleted existing dataset HCOpNumDensityUCLCHEM')
+if 'HCOpAbundUCLCHEM' in f['/PartType0']:
+        del f['/PartType0/HCOpAbundUCLCHEM']
+        print('Deleted existing dataset HCOpAbundUCLCHEM')
 
-if 'HCNNumDensityUCLCHEM' in f['/PartType0']:
-           del f['/PartType0/HCNNumDensityUCLCHEM']
-           print('Deleted existing dataset HCNNumDensityUCLCHEM')
+if 'HCNAbundUCLCHEM' in f['/PartType0']:
+           del f['/PartType0/HCNAbundUCLCHEM']
+           print('Deleted existing dataset HCNAbundUCLCHEM')
 
-if 'HNCNumDensityUCLCHEM' in f['/PartType0']:
-           del f['/PartType0/HNCNumDensityUCLCHEM']
-           print('Deleted existing dataset HNCNumDensityUCLCHEM')
+if 'HNCAbundUCLCHEM' in f['/PartType0']:
+           del f['/PartType0/HNCAbundUCLCHEM']
+           print('Deleted existing dataset HNCAbundUCLCHEM')
 
 nh_eff = np.loadtxt(inputs.hdf5_dir+'nh_eff_meshoid_10rays_'+inputs.snap+'.txt')
 xH2 = f['PartType0']['MolecularMassFraction'][:]*f['PartType0']['NeutralHydrogenAbundance'][:]/inputs.mol_hydrogen_ratio
@@ -59,32 +59,31 @@ f.create_dataset('/PartType0/H2ColDensity', data=nh2)
 print('Created new dataset H2ColDensity')
 
 co_desp = np.loadtxt(inputs.hdf5_dir+'co_abund_despotic_'+inputs.snap+'.txt')
-f.create_dataset('/PartType0/CONumDensityDespotic', data=co_desp)
-print('Created new dataset CONumDensityDespotic')
+f.create_dataset('/PartType0/COAbundDespotic', data=co_desp)
+print('Created new dataset COAbundDespotic')
 
 
 hcop_desp = np.loadtxt(inputs.hdf5_dir+'hcop_abund_despotic_'+inputs.snap+'.txt')
-f.create_dataset('/PartType0/HCOpNumDensityDespotic', data=hcop_desp)
-print('Created new dataset HCOpNumDensityDespotic')
+f.create_dataset('/PartType0/HCOpAbundDespotic', data=hcop_desp)
+print('Created new dataset HCOpAbundDespotic')
 
 
 co_ucl = np.loadtxt(inputs.hdf5_dir+'co_abund_uclchem_'+inputs.snap+'.txt')
-f.create_dataset('/PartType0/CONumDensityUCLCHEM', data=co_ucl)
-print('Created new dataset CONumDensityUCLCHEM')
+f.create_dataset('/PartType0/COAbundUCLCHEM', data=co_ucl)
+print('Created new dataset COAbundUCLCHEM')
 
 
 co_ucl = np.loadtxt(inputs.hdf5_dir+'hcop_abund_uclchem_'+inputs.snap+'.txt')
-f.create_dataset('/PartType0/HCOpNumDensityUCLCHEM', data=co_ucl)
-print('Created new dataset HCOpNumDensityUCLCHEM')
+f.create_dataset('/PartType0/HCOpAbundUCLCHEM', data=co_ucl)
+print('Created new dataset HCOpAbundUCLCHEM')
 
 co_ucl = np.loadtxt(inputs.hdf5_dir+'hcn_abund_uclchem_'+inputs.snap+'.txt')
-f.create_dataset('/PartType0/HCNNumDensityUCLCHEM', data=co_ucl)
-print('Created new dataset HCNNumDensityUCLCHEM')
+f.create_dataset('/PartType0/HCNAbundUCLCHEM', data=co_ucl)
+print('Created new dataset HCNAbundUCLCHEM')
 
 co_ucl = np.loadtxt(inputs.hdf5_dir+'hnc_abund_uclchem_'+inputs.snap+'.txt')
-f.create_dataset('/PartType0/HNCNumDensityUCLCHEM', data=co_ucl)
-print('Created new dataset HNCNumDensityUCLCHEM')
-
+f.create_dataset('/PartType0/HNCAbundUCLCHEM', data=co_ucl)
+print('Created new dataset HNCAbundUCLCHEM')
 
 f.close()
 
