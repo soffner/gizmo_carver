@@ -37,7 +37,8 @@
      Example script: radmc3d image npix 256 loadlambda fluxcons doppcatch inclline linelist nostar writepop sizepc 5.0 phi 0 incl 0 | tee output.txt
      Parameter values '256' and '5.0' should be the same as box_dim and box_size in the input file in step 8
 
-12.) Step 11 will produce an image.out file. Run radmc_moments.py on this file to produce txt files that store the mom0 information. This will write the 2D mom0 map as a txt file.
+12.) Step 11 will produce an image.out file. Run radmc_moments.py (in gizmo_carver/default_files) on this file to produce txt files that store the mom0 information. This will write the 2D mom0 map as a txt file.
+12.a) To produce mock observations, you can convolve the synthetic map with a beam and place the observe at distance > 0. Can do this via radmc_moments_obsv.py (in gizmo_carver/default_files/)
 
 13.) To get an observational X_CO, you also need the column density along the direction you have I_CO (mom0 map of CO) from in step 12. Use the file recreate_cube.py to get the column density along the LOS
      by integrating the volume density of H2. save it as a txt file.
