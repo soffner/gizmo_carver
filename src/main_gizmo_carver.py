@@ -513,6 +513,7 @@ def main_gizmo_carver(box_center=inputs.box_center, snap=inputs.snap, hdf5_dir=i
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_extra3), working_dir_name)
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_extra4), working_dir_name)
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_extra5), working_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_extra6), working_dir_name)
 
     print('Done! Output files generated at: \n\n' + os.path.abspath(working_dir_name))
 

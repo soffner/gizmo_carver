@@ -314,6 +314,7 @@ out_jobscript_HNC = 'job_hnc.sh'
 
 out_makeinput = 'input_info.txt' # Save the setup parameters and output
 out_extra1 = 'radmc_moments.py'
+out_extra6 = 'radmc_moments_obsv.py'
 out_extra2 = 'recreate_cube.py'
 out_extra3 = 'check_radmc_input.py'
 out_extra4 = 'radmc_image_processing.py'
