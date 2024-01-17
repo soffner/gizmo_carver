@@ -1,7 +1,7 @@
 #!/bin/bash
 #PBS -P iv23
 #PBS -q normal
-#PBS -l walltime=34:00:00
+#PBS -l walltime=14:00:00
 #PBS -l ncpus=48
 #PBS -l mem=192GB
 #PBS -l storage=scratch/jh2+gdata/jh2
@@ -12,7 +12,7 @@
 #PBS -M u6645980@alumni.anu.edu.au
 
 #to write levelpop_co.dat, include writepop keyword: radmc3d image npix 256 loadlambda fluxcons doppcatch inclline linelist nostar writepop sizepc 5.0 phi 0 incl 0 | tee output.txt
-sizepc=5.0
+sizepc=0.5
 phi=0
 incl=0
 npix=256
