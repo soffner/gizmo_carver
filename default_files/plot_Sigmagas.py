@@ -47,8 +47,8 @@ center = np.median(pos,axis=0) #np.array([15.95957649, 15.54566532, 15.19446488]
 center[1]=center[1]-0.8125 #to get the dense clump in the center of the box
 center[0]=center[0]-0.1875
 
-rmax = float(input('Enter box size from center in pc '))
-res = 800
+rmax = 1.0 #float(input('Enter box size from center in pc '))
+res = 256
 X = Y = np.linspace(-rmax, rmax, res)
 X, Y = np.meshgrid(X, Y)
 
@@ -61,6 +61,7 @@ f, ax = plt.subplots(figsize=(6,6))
 sigma_gas_msun_pc2 = M.SurfaceDensity(M.m, center=np.array([0,0,0]),
                                       res=res, size=rmax)
 
+np.savetxt(inputs.hdf5_dir + 'Sigma_gas_' + inputs.snap + '_' + str(rmax) + 'pc.txt', sigma_gas_msun_pc2, fmt='%0.1e')
 p = ax.pcolormesh(X, Y, sigma_gas_msun_pc2, norm=colors.LogNorm(vmin=.1,vmax=1e3))
 ax.set_aspect('equal')
 set_cbar(p, ax, r"$\Sigma_{gas}$ $(\rm M_\odot\,pc^{-2})$")
