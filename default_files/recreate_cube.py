@@ -12,6 +12,8 @@ import matplotlib.pyplot as plt
 hdf5_file = inputs.hdf5_dir+'snapshot_'+inputs.snap+'.hdf5'
 ds = yt.load(hdf5_file, unit_base=inputs.unit_base)
 
+print('using box size ', inputs.box_size, ' pc on either side of the center')
+
 le = [inputs.box_center[0] - inputs.box_size, inputs.box_center[1] - inputs.box_size, inputs.box_center[2] - inputs.box_size]
 re = [inputs.box_center[0] + inputs.box_size, inputs.box_center[1] + inputs.box_size, inputs.box_center[2] + inputs.box_size]
 res = inputs.box_dim
@@ -20,19 +22,33 @@ ires = int(res.imag)
 cs = ds.r[le[0]:re[0]:res, le[1]:re[1]:res, le[2]:re[2]:res]
 
 numh2 = cs[('PartType0', 'H2NumDensity')]
-
 cc = np.zeros((ires, ires))
-
 #integrate along the z direction to find the column density
 for i in range(0, ires):
 	for j in range(0, ires):
-		cc[i][j] = (inputs.box_size/res.imag)*3.086e18*np.sum(numh2[i][j])*yt.YTQuantity(1, 'cm**-2')
+		cc[i][j] = (2.0*inputs.box_size/res.imag)*3.086e18*np.sum(numh2[i][j])*yt.YTQuantity(1, 'cm**-2')
 
-np.savetxt('numh2_'+inputs.snap+'.txt', cc, fmt='%e')
+np.savetxt('numh2_'+inputs.snap+'_'+str(inputs.box_size)+'_'+str(ires)+'.txt', cc, fmt='%e')
 
-f, ax = plt.subplots(1,1)
+#f, ax = plt.subplots(1,1)
+#im = ax.imshow(np.log10(cc), origin='lower')
+#f.colorbar(im)
+#f.savefig('coldens_'+inputs.snap+'_'+str(inputs.box_size)+'_'+str(ires)+'.png', bbox_inches='tight')
 
-im = ax.imshow(np.log10(cc), origin='lower')
-f.colorbar(im)
+numh2 = cs[('PartType0', 'CONumberDensityDespotic')]
+cc = np.zeros((ires, ires))
+#integrate along the z direction to find the column density
+for i in range(0, ires):
+           for j in range(0, ires):
+                   cc[i][j] = (2.0*inputs.box_size/res.imag)*3.086e18*np.sum(numh2[i][j])*yt.YTQuantity(1, 'cm**-2')
 
-f.savefig('coldens_'+inputs.snap+'.png', bbox_inches='tight')
+np.savetxt('numco_despotic_'+inputs.snap+'_'+str(inputs.box_size)+'_'+str(ires)+'.txt', cc, fmt='%e')
+
+numh2 = cs[('PartType0', 'CONumberDensityUCLCHEM')]
+cc = np.zeros((ires, ires))
+#integrate along the z direction to find the column density
+for i in range(0, ires):
+           for j in range(0, ires):
+                   cc[i][j] = (2.0*inputs.box_size/res.imag)*3.086e18*np.sum(numh2[i][j])*yt.YTQuantity(1, 'cm**-2')
+
+np.savetxt('numco_uclchem_'+inputs.snap+'_'+str(inputs.box_size)+'_'+str(ires)+'.txt', cc, fmt='%e')
