@@ -28,7 +28,7 @@ for i in range(0, ires):
 	for j in range(0, ires):
 		cc[i][j] = (2.0*inputs.box_size/res.imag)*3.086e18*np.sum(numh2[i][j])*yt.YTQuantity(1, 'cm**-2')
 
-np.savetxt('numh2_'+inputs.snap+'_'+str(inputs.box_size)+'_'+str(ires)+'.txt', cc, fmt='%e')
+np.savetxt('numh2_'+inputs.snap+'_'+format(inputs.box_size, '.1f')+'_'+str(ires)+'.txt', cc, fmt='%e')
 
 #f, ax = plt.subplots(1,1)
 #im = ax.imshow(np.log10(cc), origin='lower')
@@ -42,7 +42,7 @@ for i in range(0, ires):
            for j in range(0, ires):
                    cc[i][j] = (2.0*inputs.box_size/res.imag)*3.086e18*np.sum(numh2[i][j])*yt.YTQuantity(1, 'cm**-2')
 
-np.savetxt('numco_despotic_'+inputs.snap+'_'+str(inputs.box_size)+'_'+str(ires)+'.txt', cc, fmt='%e')
+np.savetxt('numco_despotic_'+inputs.snap+'_'+format(inputs.box_size, '.1f')+'_'+str(ires)+'.txt', cc, fmt='%e')
 
 numh2 = cs[('PartType0', 'CONumberDensityUCLCHEM')]
 cc = np.zeros((ires, ires))
@@ -51,4 +51,4 @@ for i in range(0, ires):
            for j in range(0, ires):
                    cc[i][j] = (2.0*inputs.box_size/res.imag)*3.086e18*np.sum(numh2[i][j])*yt.YTQuantity(1, 'cm**-2')
 
-np.savetxt('numco_uclchem_'+inputs.snap+'_'+str(inputs.box_size)+'_'+str(ires)+'.txt', cc, fmt='%e')
+np.savetxt('numco_uclchem_'+inputs.snap+'_'+format(inputs.box_size, '.1f')+'_'+str(ires)+'.txt', cc, fmt='%e')
