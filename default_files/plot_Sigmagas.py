@@ -47,7 +47,7 @@ center = np.median(pos,axis=0) #np.array([15.95957649, 15.54566532, 15.19446488]
 center[1]=center[1]-0.8125 #to get the dense clump in the center of the box
 center[0]=center[0]-0.1875
 
-rmax = 1.0 #float(input('Enter box size from center in pc '))
+rmax = 20.0 #float(input('Enter box size from center in pc '))
 res = 256
 X = Y = np.linspace(-rmax, rmax, res)
 X, Y = np.meshgrid(X, Y)
@@ -65,6 +65,28 @@ np.savetxt(inputs.hdf5_dir + 'Sigma_gas_' + inputs.snap + '_' + str(rmax) + 'pc.
 p = ax.pcolormesh(X, Y, sigma_gas_msun_pc2, norm=colors.LogNorm(vmin=.1,vmax=1e3))
 ax.set_aspect('equal')
 set_cbar(p, ax, r"$\Sigma_{gas}$ $(\rm M_\odot\,pc^{-2})$")
+xlims = ax.get_xlim()
+ylims = ax.get_ylim()
+
+#plot stars
+if 'PartType5' in F.keys():
+    masses = F["PartType5"]["Masses"][:]
+    print('Number of stars formed ', len(masses))
+    print('Min mean max stellar mass %0.3f %0.3f %0.3f'%(np.min(masses), np.mean(masses), np.max(masses)), ' Msun')
+    sink_pos = F["PartType5"]["Coordinates"][:]
+    sink_pos -= center
+    sink_pos_x = sink_pos[:,0]
+    sink_pos_y = sink_pos[:,1]
+
+    massive = np.where(masses >= 8)[0]
+    print('Massive stars are ', masses[massive], ' Msun')
+
+    ax.scatter(sink_pos_x[massive], sink_pos_y[massive], marker='*', edgecolor='m', fc='white', s=100, alpha=0.5)
+    ax.set_xlim(xlims)
+    ax.set_ylim(ylims)
+else:
+    print('No stars formed yet.')
+
 ax.set_xlabel("x (pc)")
 ax.set_ylabel("y (pc)")
 ax.grid()
