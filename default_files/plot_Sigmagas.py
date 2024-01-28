@@ -12,6 +12,7 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 import matplotlib.colors as colors
 from meshoid import Meshoid
 import h5py
+import cmasher as cm
 
 fontsize = 12
 
@@ -62,7 +63,7 @@ sigma_gas_msun_pc2 = M.SurfaceDensity(M.m, center=np.array([0,0,0]),
                                       res=res, size=rmax)
 
 np.savetxt(inputs.hdf5_dir + 'Sigma_gas_' + inputs.snap + '_' + str(rmax) + 'pc.txt', sigma_gas_msun_pc2, fmt='%0.1e')
-p = ax.pcolormesh(X, Y, sigma_gas_msun_pc2, norm=colors.LogNorm(vmin=.1,vmax=1e3))
+p = ax.pcolormesh(X, Y, sigma_gas_msun_pc2, norm=colors.LogNorm(vmin=.1,vmax=1e3), cmap=cm.eclipse)
 ax.set_aspect('equal')
 set_cbar(p, ax, r"$\Sigma_{gas}$ $(\rm M_\odot\,pc^{-2})$")
 xlims = ax.get_xlim()
