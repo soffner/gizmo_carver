@@ -7,6 +7,12 @@ import numpy as np
 def _DustDensity(field, data):
     return inputs.dust_to_gas * data[('PartType0', 'Density')].to('g/cm**3')
 
+def _NumberDensity(field, data):
+    return data[('PartType0', 'NumDensity')] * yt.YTQuantity(1, 'cm**-3')
+
+def _ElectronNumberDensity(field, data):
+    return data[('PartType0', 'NumberDensity')] * data[('PartType0', 'ElectronAbundance')]
+
 # Definition of the gas temperature. Uses info from inputs
 def _gas_temp_CO(field, data):
     #y_helium = inputs.helium_mass_fraction/(4.0*(1-inputs.helium_mass_fraction))
@@ -119,7 +125,7 @@ def _HNCNumberDensityUCLCHEM(field, data):
 # Definition of the microturbulence at each point. Uses info from inputs
 def _MicroTurb(field, data):
     turb = data['PartType0', 'velocity_x']
-    # use the sizd linewidth relation: lw = 0.72 * (size/1pc)**0.56 km/s; size is of the regridded cell
+    # use the size linewidth relation: lw = 0.72 * (size/1pc)**0.56 km/s; size is of the regridded cell
     # equation 26 of McKee and Ostriker 2007
     microturbulence_speed = 0.72 * ((2*inputs.box_size)/inputs.box_dim.imag)**0.50 * 1e5 #cgs
     print('Microturbulence speed is ', microturbulence_speed/1e5, ' km/s')
@@ -145,6 +151,8 @@ def _Mask(field, data):
 
 
 # Add all the fields
+yt.add_field(("PartType0", "NumberDensity"), function=_NumberDensity, units="cm**-3", sampling_type='particle', force_override=True)
+yt.add_field(("PartType0", "ElectronNumberDensity"), function=_ElectronNumberDensity, units="cm**-3", sampling_type='particle', force_override=True)
 
 yt.add_field(("PartType0", "gas_temperature_CO"), function=_gas_temp_CO, units="K", sampling_type='particle', force_override=True)
 yt.add_field(("PartType0", "gas_temperature_HCOp"), function=_gas_temp_HCOp, units="K", sampling_type='particle', force_override=True)
