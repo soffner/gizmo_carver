@@ -14,7 +14,7 @@ from meshoid import Meshoid
 import h5py
 import cmasher as cm
 
-fontsize = 12
+fontsize = 14
 
 def set_allticks(ax):
     ax.tick_params(axis='both', which='major', direction = 'in', top=True, right=True, labelsize=fontsize, length=7)
@@ -48,9 +48,9 @@ center = np.median(pos,axis=0) #np.array([15.95957649, 15.54566532, 15.19446488]
 center[1]=center[1]-0.8125 #to get the dense clump in the center of the box
 center[0]=center[0]-0.1875
 
-rmax = 20.0 #float(input('Enter box size from center in pc '))
+rmax = 20.0 #float(input('Enter box side length in pc '))
 res = 256
-X = Y = np.linspace(-rmax, rmax, res)
+X = Y = np.linspace(-rmax/2., rmax/2., res)
 X, Y = np.meshgrid(X, Y)
 
 pos -= center
@@ -63,9 +63,9 @@ sigma_gas_msun_pc2 = M.SurfaceDensity(M.m, center=np.array([0,0,0]),
                                       res=res, size=rmax)
 
 np.savetxt(inputs.hdf5_dir + 'Sigma_gas_' + inputs.snap + '_' + str(rmax) + 'pc.txt', sigma_gas_msun_pc2, fmt='%0.1e')
-p = ax.pcolormesh(X, Y, sigma_gas_msun_pc2, norm=colors.LogNorm(vmin=.1,vmax=1e3), cmap=cm.eclipse)
+p = ax.pcolormesh(X, Y, sigma_gas_msun_pc2, norm=colors.LogNorm(vmin=.1,vmax=1e3), cmap='cividis')
 ax.set_aspect('equal')
-set_cbar(p, ax, r"$\Sigma_{gas}$ $(\rm M_\odot\,pc^{-2})$")
+set_cbar(p, ax, r"$\Sigma_{\rm{gas}}$ $(\rm M_\odot\,pc^{-2})$")
 xlims = ax.get_xlim()
 ylims = ax.get_ylim()
 
@@ -82,14 +82,15 @@ if 'PartType5' in F.keys():
     massive = np.where(masses >= 8)[0]
     print('Massive stars are ', masses[massive], ' Msun')
 
-    ax.scatter(sink_pos_x[massive], sink_pos_y[massive], marker='*', edgecolor='m', fc='white', s=100, alpha=0.5)
+    ax.scatter(sink_pos_x[massive], sink_pos_y[massive], marker='*', edgecolor='m', fc='white', s=100, alpha=1)
     ax.set_xlim(xlims)
     ax.set_ylim(ylims)
 else:
     print('No stars formed yet.')
 
-ax.set_xlabel("x (pc)")
-ax.set_ylabel("y (pc)")
-ax.grid()
-f.savefig(inputs.hdf5_dir + 'Sigma_gas_' + inputs.snap + '_' + str(rmax) + 'pc.png', bbox_inches='tight')
+ax.set_xlabel("x (pc)", fontsize=fontsize)
+ax.set_ylabel("y (pc)", fontsize=fontsize)
+set_allticks(ax)
+#ax.grid()
+f.savefig(inputs.hdf5_dir + 'Sigma_gas_' + inputs.snap + '_' + format(rmax/2, '.1f') + 'pc.png', bbox_inches='tight')
 plt.clf()
