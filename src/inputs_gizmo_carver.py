@@ -44,19 +44,19 @@ box_units = 'pc'
 # x, y, z coordinates for the center of the carved domain (e.g., location of a star core)
 # The values should match the unit given by box_units
 #box_center = [15.95957649, 15.54566532, 15.19446488] #M2e3, center = 15
-box_center = [48.55052441, 47.38566334, 49.65661156] #[49.52588194, 49.16974805, 49.712277] #[55.8,44.8, 57.2] # Core 1, 330  #M2e4 center = 50
+box_center = [48.55052441, 47.38566334, 49.65661156] # for 32..2000 snapshot M2e4 [49.52588194, 49.16974805, 49.712277] #[55.8,44.8, 57.2] # Core 1, 330  #M2e4 center = 50
 
 # Routine will generate input files for a square area centered at box_center 
 # extending to box_center += box_size on each side
 # Use same units as box_units
-box_size = 1.0 # pc (=L/2)
+box_size = 5.0 # pc (=L/2)
 
 # Resolution of the resulting image (give as a complex number, e.g. for 
 # box_dim = 64j, the resulting image will be 64x64)
 box_dim = 256j
 
 # Snapshot number
-snap = '2000'
+snap = '4600'
 
 # Name tag for output file directory
 tag = 'sn'+snap+'_'+ str(int(np.imag(box_dim)))+'_'
@@ -189,6 +189,7 @@ out_h13copuclname = "numberdens_H13COp_uclchem.inp"
 out_hcnuclname = "numberdens_HCN_uclchem.inp"
 out_hncuclname = "numberdens_HNC_uclchem.inp"
 
+out_elecname = "numberdens_e.inp"
 out_nhname = "numberdens_h2.inp" # output file name for h2 number density
 out_vfname = "gas_velocity.inp"   # output file name for velocity
 
@@ -311,11 +312,13 @@ out_jobscript_HCOp = 'job_hcop.sh'
 out_jobscript_H13COp = 'job_h13cop.sh'
 out_jobscript_HCN = 'job_hcn.sh'
 out_jobscript_HNC = 'job_hnc.sh'
+out_jobscript_tau = 'job_tau.sh' #optical depths
 
 out_makeinput = 'input_info.txt' # Save the setup parameters and output
 out_extra1 = 'radmc_moments.py'
-out_extra6 = 'radmc_moments_obsv.py'
-out_extra2 = 'recreate_cube.py'
-out_extra3 = 'check_radmc_input.py'
-out_extra4 = 'radmc_image_processing.py'
-out_extra5 = 'get_coldens_from_pytreegrav.py' #file to get the column densities from pytreegrav RT
+out_extra2 = 'radmc_moments_obsv.py'
+out_extra3 = 'recreate_cube.py'
+out_extra4 = 'check_radmc_input.py'
+out_extra5 = 'radmc_image_processing.py'
+out_extra6 = 'get_coldens_from_pytreegrav.py' #file to get the column densities from pytreegrav RT
+out_extra7 = 'radmc_tau.py' #run radmc to return optical depths at each (x,y,z)

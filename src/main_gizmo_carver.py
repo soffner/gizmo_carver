@@ -347,6 +347,7 @@ def main_gizmo_carver(box_center=inputs.box_center, snap=inputs.snap, hdf5_dir=i
     if inputs.mask_abundance == True:
         writer.write_line_file(('PartType0', 'MaskedMolecularNumDensity'), os.path.join(working_dir_name, inputs.out_nfname))
     else:
+        writer.write_line_file(('PartType0', 'ElectronNumberDensity'), os.path.join(working_dir_name, inputs.out_elecname))
         writer.write_line_file(('PartType0', 'CONumberDensityDefault'), os.path.join(new1_dir_name, inputs.out_codefaultname))
         writer.write_line_file(('PartType0', 'CONumberDensityDespotic'), os.path.join(new2_dir_name, inputs.out_codespname))
         writer.write_line_file(('PartType0', '13CONumberDensityDespotic'), os.path.join(new2_dir_name, inputs.out_13codespname))
@@ -507,6 +508,7 @@ def main_gizmo_carver(box_center=inputs.box_center, snap=inputs.snap, hdf5_dir=i
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_jobscript_H13COp), working_dir_name)
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_jobscript_HCN), working_dir_name)
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_jobscript_HNC), working_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_jobscript_tau), working_dir_name)
 
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_extra1), working_dir_name)
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_extra2), working_dir_name)
@@ -514,6 +516,7 @@ def main_gizmo_carver(box_center=inputs.box_center, snap=inputs.snap, hdf5_dir=i
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_extra4), working_dir_name)
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_extra5), working_dir_name)
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_extra6), working_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_extra7), working_dir_name)
 
     print('Done! Output files generated at: \n\n' + os.path.abspath(working_dir_name))
 
