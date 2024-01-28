@@ -3,7 +3,7 @@
 
 2.) Get the snapshot from frontera on gadi (if you want to do the analysis on gadi)
 
-3.) Run the jupyter notebook to get basic info of the snapshot. This uses both yt and meshoid.
+3.) Run the jupyter notebook offnerI.ipynb to get basic info of the snapshot. This uses both yt and meshoid.
 
 4.) Run the ray tracing script in pytreegrav to obtain the column density of H2 for a starforge snapshot: https://github.com/mikegrudic/pytreegrav#ray-tracing
     Since this has to be done only once per snapshot, you can afford to use 100 rays with randomized directions so that you can decrease the noise and make it less correlated
@@ -24,6 +24,7 @@
 
 7.) Load the CO abundances as a new field by creatting a new .HDF5 using h5py (yt doesn't do it for GIZMO datasets). This new field will be dimensionless in yt. 
     Example script: add_molecules_to_data.py (in gizmo_carver/default_files/)
+    This script will also store H2 column densities and H number densities which are needed in gizmo_carver later on
     I name the modified file the same as the original one (if you want to keep the original, rename it) so that gizmo_carver scripts below do not need to be fiddled with
 
 8.) Set the input parameters in the file input_gizmo_carver.py in gizmo_carver/src/. Checkout new_fields_list.py because thats where we add column density (in cm**-2) as a yt field.
@@ -34,8 +35,8 @@
      Make sure to rename the molecular numdens file you want to use to numberdens_co.inp as RADMC expects LAMDA Leiden database naming
 
 11.) Run radmc3d to produce image.out using numberdens_co.inp takes 1.5 hrs, submit as a job)
-     Example script: radmc3d image npix 256 loadlambda fluxcons doppcatch inclline linelist nostar writepop sizepc 5.0 phi 0 incl 0 | tee output.txt
-     Parameter values '256' and '5.0' should be the same as box_dim and box_size in the input file in step 8
+     Example script: radmc3d image npix 256 loadlambda fluxcons doppcatch inclline linelist nostar writepop sizepc 10.0 phi 0 incl 0 | tee output.txt
+     Parameter values '256' and '10.0' should be the same as box_dim and (TWO*box_size) in the input file in step 8. NOTE the factor of two in box size since radmc needs the side length and not the length from the center.
 
 12.) Step 11 will produce an image.out file. Run radmc_moments.py (in gizmo_carver/default_files) on this file to produce txt files that store the mom0 information. This will write the 2D mom0 map as a txt file.
 12.a) To produce mock observations, you can convolve the synthetic map with a beam and place the observe at distance > 0. Can do this via radmc_moments_obsv.py (in gizmo_carver/default_files/)
@@ -44,7 +45,9 @@
      by integrating the volume density of H2. save it as a txt file.
      NOTE: this column density is not the same as the column density used in step 6: that was local to the particle. This is along the LOS to the observer.
 
-14.) Ratio of the mom0 map of CO 1-0 to H2 column density will give you the conversion factor X_CO
+14.) Ratio of the H2 column density to the mom0 map of CO 1-0 will give you the conversion factor X_CO
+
+15.) To get a map of optical depths, run raadmc with the keyword tracetau. Use radmc_tau.py script (in gizmo_carver/default_files) to get the max optical depth in each spaxel (2D map).
 
 gizmo_carver original documentation below:
 
