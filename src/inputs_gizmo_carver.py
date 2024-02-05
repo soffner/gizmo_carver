@@ -44,12 +44,12 @@ box_units = 'pc'
 # x, y, z coordinates for the center of the carved domain (e.g., location of a star core)
 # The values should match the unit given by box_units
 #box_center = [15.95957649, 15.54566532, 15.19446488] #M2e3, center = 15
-box_center = [48.55052441, 47.38566334, 49.65661156] # for 32..2000 snapshot M2e4 [49.52588194, 49.16974805, 49.712277] #[55.8,44.8, 57.2] # Core 1, 330  #M2e4 center = 50
+box_center = [48.55052441, 47.38566334, 49.65661156] # for 32..2000 M2e4 [49.52588194, 49.16974805, 49.712277] #[55.8,44.8, 57.2] # Core 1, 330  #M2e4 center = 50
 
 # Routine will generate input files for a square area centered at box_center 
 # extending to box_center += box_size on each side
 # Use same units as box_units
-box_size = 5.0 # pc (=L/2)
+box_size = 10.0 # pc (=L/2)
 
 # Resolution of the resulting image (give as a complex number, e.g. for 
 # box_dim = 64j, the resulting image will be 64x64)
@@ -322,3 +322,4 @@ out_extra4 = 'check_radmc_input.py'
 out_extra5 = 'radmc_image_processing.py'
 out_extra6 = 'get_coldens_from_pytreegrav.py' #file to get the column densities from pytreegrav RT
 out_extra7 = 'radmc_tau.py' #run radmc to return optical depths at each (x,y,z)
+out_extra8 = 'writefits.py' #run to produce PPV FITS cubes (un)convolved with beam and placing observer at some distance
