@@ -12,7 +12,11 @@ def _DustDensity(field, data):
 # Definition of the gas temperature. Uses info from inputs
 def _gas_temp(field, data):
     try:
-        return yt.YTArray(data[("PartType0", "Temperature")], "K")
+        if data[("PartType0", "Temperature")].units == (dimensionless):
+            return yt.YTArray(data[("PartType0", "Temperature")], "K")
+        else:
+            return yt.YTArray(data[("PartType0", "Temperature")]) * 1e-6
+
     except:
         y_helium = inputs.helium_mass_fraction / (
             4.0 * (1 - inputs.helium_mass_fraction)
