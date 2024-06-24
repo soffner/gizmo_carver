@@ -29,7 +29,7 @@ from datetime import datetime
 import shutil
 import numpy as np
 import glob as glob
-from new_fields_list import *
+from new_fields_list import add_custom_fields
 import sys
 import h5py as h5py
 
@@ -39,7 +39,7 @@ import h5py as h5py
 def main_gizmo_carver(box_center=inputs.box_center, snap=inputs.snap, hdf5_dir=inputs.hdf5_dir, tag=inputs.tag):
 
     hdf5_file =  hdf5_dir+'snapshot_'+snap+'.hdf5'
-    tag = 'sn'+snap+'_'+ np.str(np.int(np.imag(inputs.box_dim)))+'_'
+    tag = 'sn'+snap+'_'+ str(int(np.imag(inputs.box_dim)))+'_'
 
     if inputs.mask_abundance == True:
         # Need to read and concatenate these files of accreted particles
@@ -70,9 +70,11 @@ def main_gizmo_carver(box_center=inputs.box_center, snap=inputs.snap, hdf5_dir=i
     print("domain = ", ds.domain_left_edge, ds.domain_right_edge)
 
     try:
-        print("Loaded file " + str(ds)) 
+        print("Loaded file " + str(ds))
     except NameError:
         assert False, "YT unable to properly load file!"
+
+    add_custom_fields(ds)
 
     now = datetime.now()
     dt_string = now.strftime("%m.%d.%y_%H.%M.%S")
@@ -508,7 +510,8 @@ def main_gizmo_carver(box_center=inputs.box_center, snap=inputs.snap, hdf5_dir=i
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_jobscript_H13COp), working_dir_name)
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_jobscript_HCN), working_dir_name)
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_jobscript_HNC), working_dir_name)
-    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_jobscript_tau), working_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_jobscript_tau_co), working_dir_name)
+    shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_jobscript_tau_13co), working_dir_name)
 
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_extra1), working_dir_name)
     shutil.copy(os.path.join(inputs.existing_filepath, inputs.out_extra2), working_dir_name)

@@ -22,7 +22,7 @@ from yt.units import *
 import numpy as np
 
 # Constants for calculating derived fields
-dust_to_gas = 0.01
+dust_to_gas = 1e-4 #scale it with metallicity
 mol_hydrogen_ratio = 2.0
 #microturbulence_speed = 1.77264e5 # cgs: based on the relation linewidth = 0.72 * (L/1pc)**0.56 km/s, where L is the size of the regridded cell. 
 gamma = 5.0/3.0 # Note gamma is not constant and this function is an approximation.
@@ -49,14 +49,14 @@ box_center = [48.55052441, 47.38566334, 49.65661156] # for 32..2000 M2e4 [49.525
 # Routine will generate input files for a square area centered at box_center 
 # extending to box_center += box_size on each side
 # Use same units as box_units
-box_size = 10.0 # pc (=L/2)
+box_size = 10 # pc (=L/2)
 
 # Resolution of the resulting image (give as a complex number, e.g. for 
 # box_dim = 64j, the resulting image will be 64x64)
 box_dim = 256j
 
 # Snapshot number
-snap = '4600'
+snap = '1500'
 
 # Name tag for output file directory
 tag = 'sn'+snap+'_'+ str(int(np.imag(box_dim)))+'_'
@@ -64,7 +64,7 @@ tag = 'sn'+snap+'_'+ str(int(np.imag(box_dim)))+'_'
 # Filepath of the HDF5 file name to read in
 # If the HDF5 file is located in the same directory as the script files, 
 # you can just put the file name
-hdf5_dir = '/g/data/jh2/ps3459/starforge_data/32/'
+hdf5_dir = '/g/data/jh2/ps3459/starforge_data/45/'
 
 # unit base to use for calculations
 unit_base = {'UnitMagneticField_in_gauss':  1e+4,
@@ -127,6 +127,10 @@ restfreq_C18O_J87 = 877.9219553e9
 restfreq_C18O_J98 = 987.5603822e9
 restfreq_C18O_J109 = 1097.1628753e9
 
+restfreq_C_J10 = 492.160651e9
+restfreq_C_J21 = 809.34197e9
+restfreq_C_J32 = 1301.50262e9
+
 restfreq_HCOp_J10 = 89.18852470e9
 restfreq_HCOp_J21 = 178.37505630e9
 restfreq_HCOp_J32 = 267.55762590e9
@@ -181,6 +185,8 @@ out_c18odespname = "numberdens_C18O_despotic.inp"
 out_13couclname = "numberdens_13CO_uclchem.inp"
 out_c18ouclname = "numberdens_C18O_uclchem.inp"
 
+out_cuclname = "numberdens_C_uclchem.inp"
+
 out_hcopdespname = "numberdens_HCOp_despotic.inp"
 out_hcopuclname = "numberdens_HCOp_uclchem.inp"
 out_h13copdespname = "numberdens_H13COp_despotic.inp"
@@ -197,6 +203,7 @@ out_tfname_CO = "gas_temperature_CO.inp"    # output file name for temperature
 out_tfname_HCOp = "gas_temperature_HCOp.inp"
 out_tfname_HCN = "gas_temperature_HCN.inp"
 out_tfname_HNC = "gas_temperature_HNC.inp"
+out_tfname_C = "gas_temperature_C.inp"
 
 out_ddfname = "dust_density.inp" # output file name for dust density
 out_dtfname = "dust_temperature.dat" # output for dust temperature (requires .dat)
@@ -210,6 +217,7 @@ out_molname_HCOp = 'molecule_hcop.inp'
 out_molname_H13COp = 'molecule_h13cop.inp'
 out_molname_HCN = 'molecule_hcn.inp'
 out_molname_HNC = 'molecule_hnc.inp'
+out_molname_C = 'molecule_c.inp'
 
 # Names of lines.inp files
 out_linesname_CO = 'lines_co.inp'
@@ -219,6 +227,7 @@ out_linesname_HCOp = 'lines_hcop.inp'
 out_linesname_H13COp = 'lines_h13cop.inp'
 out_linesname_HCN = 'lines_hcn.inp'
 out_linesname_HNC = 'lines_hnc.inp'
+out_linesname_C = 'lines_c.inp'
 
 out_wlmname = 'wavelength_micron.inp' #wavelength file for continuum radiative transfer: https://www.ita.uni-heidelberg.de/~dullemond/software/radmc-3d/manual_radmc3d/inputoutputfiles.html#sec-wavelengths
 
@@ -254,6 +263,11 @@ out_cwlname_C18O_J76 = 'camera_wavelength_micron_C18OJ76.inp'
 out_cwlname_C18O_J87 = 'camera_wavelength_micron_C18OJ87.inp'
 out_cwlname_C18O_J98 = 'camera_wavelength_micron_C18OJ98.inp'
 out_cwlname_C18O_J109 = 'camera_wavelength_micron_C18OJ109.inp'
+
+out_cwlname_C_J10 = 'camera_wavelength_micron_CJ10.inp'
+out_cwlname_C_J21 = 'camera_wavelength_micron_CJ21.inp'
+out_cwlname_C_J32 = 'camera_wavelength_micron_CJ32.inp'
+
 
 out_cwlname_HCOp_J10 = 'camera_wavelength_micron_HCOpJ10.inp' #narrowly spaced wavelengths around restfreq for line radiative transfer
 out_cwlname_HCOp_J21 = 'camera_wavelength_micron_HCOpJ21.inp'
@@ -312,7 +326,9 @@ out_jobscript_HCOp = 'job_hcop.sh'
 out_jobscript_H13COp = 'job_h13cop.sh'
 out_jobscript_HCN = 'job_hcn.sh'
 out_jobscript_HNC = 'job_hnc.sh'
-out_jobscript_tau = 'job_tau.sh' #optical depths
+out_jobscript_C = 'job_c.sh'
+out_jobscript_tau_co = 'job_tau_co.sh' #optical depths
+out_jobscript_tau_13co = 'job_tau_13co.sh'
 
 out_makeinput = 'input_info.txt' # Save the setup parameters and output
 out_extra1 = 'radmc_moments.py'
