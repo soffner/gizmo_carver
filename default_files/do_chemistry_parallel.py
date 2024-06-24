@@ -38,8 +38,8 @@ import warnings
 warnings.filterwarnings('ignore')
 
 ncpus=48
-path = '/g/data1b/jh2/ps3459/starforge_data/32/'
-snap = '2000'
+path = '/g/data1b/jh2/ps3459/starforge_data/44/'
+snap = '1500'
 ucl_path = '/g/data1b/jh2/ps3459/UCLCHEM/mydata/'
 despcloud_fname = '/g/data1b/jh2/ps3459/despotic/cloudfiles/basic_starforge.desp'
 nheff_meshoid = np.loadtxt(path+'nh_eff_meshoid_10rays_'+snap+'.txt')
@@ -96,7 +96,8 @@ l_eff = (3 * vol / (4 * np.pi))**(1./3.)
 
 
 #set initial abundances of C and O atoms per H nuclei (adopted from UCLCHEM default)
-info = {'xC':1.77e-4, 'xO':3.34e-4, 'xC+':0, 'xCO':0, 'xO+':0}
+info = {'xC':1.77e-4, 'xO':3.34e-4, 'xC+':0, 'xCO':0, 'xO+':0} # Solar
+
 
 #import basic despotic cloud
 c = cloud(fileName=despcloud_fname, verbose=False)

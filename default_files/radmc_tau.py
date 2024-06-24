@@ -34,11 +34,11 @@ h13copstr = 'restfreq_H13COp_J'
 hcnstr = 'restfreq_HCN_J'
 hncstr = 'restfreq_HNC_J'
 
-Js = ['10'] #, '21', '32', '43', '54', '65', '76', '87', '98', '109']
+Js = ['10', '21'] #, '32', '43', '54', '65', '76', '87', '98', '109']
 
 #we calculate the max optical depth in a given spaxel by taking max of optical depths over aall spectral channels
 
-
+'''
 #CO
 for i in range(0, len(Js)):
     freq = getattr(inputs, costr + Js[i])
@@ -58,5 +58,24 @@ for i in range(0, len(Js)):
     np.savetxt('uclchem/uclchem_co_tau_J'+Js[i]+'.txt', cc, fmt='%e')
 
     print('')
+'''
+
+#13CO
+for i in range(0, len(Js)):
+    freq = getattr(inputs, co13str + Js[i])
+    print('frequency used over 13CO 1-0 frequency is ', freq/inputs.restfreq_13CO_J10)
+
+    m_image = radmc3dImage()
+    m_image.readImage('despotic/tau_13CO_despotic_J'+Js[i]+'.out')
+    bb = m_image.image
+    cc = np.max(bb, axis=2)
+    np.savetxt('despotic/despotic_13co_tau_J'+Js[i]+'.txt', cc, fmt='%e')
+
+    #UCLCHEM
+    m_image = radmc3dImage()
+    m_image.readImage('uclchem/tau_13CO_uclchem_J'+Js[i]+'.out')
+    bb = m_image.image
+    cc = np.max(bb, axis=2)
+    np.savetxt('uclchem/uclchem_13co_tau_J'+Js[i]+'.txt', cc, fmt='%e')
 
 print('All done!')

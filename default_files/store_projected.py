@@ -57,4 +57,19 @@ isrf_norm = isrf*(cons.M_sun.cgs.value*1e4/cons.pc.cgs.value**3)/6.63e-14
 bb = M.ProjectedAverage(isrf_norm, center=np.array([0,0,0]), res=res, size=2*rmax)
 np.savetxt(inputs.hdf5_dir + 'isrf_proj_' + inputs.snap + '_' + format(rmax, '.1f') + '_' + str(res) + '.txt', bb, fmt='%0.1e')
 
+#projected average of H2 column density - note this is the column locally seen by a particle (which we find from pytreegrav)
+dens = F['PartType0']['H2ColDensity'][:]
+bb = M.ProjectedAverage(dens, center=np.array([0,0,0]), res=res, size=2*rmax)
+np.savetxt(inputs.hdf5_dir + 'pytreegrav_nh2_proj_' + inputs.snap + '_' + format(rmax, '.1f') + '_' + str(res) + '.txt', bb, fmt='%0.1e')
+
+#projected average of gas temperature
+dens = F['PartType0']['Temperature'][:]
+bb = M.ProjectedAverage(dens, center=np.array([0,0,0]), res=res, size=2*rmax)
+np.savetxt(inputs.hdf5_dir + 'gastemp_proj_' + inputs.snap + '_' + format(rmax, '.1f') + '_' + str(res) + '.txt', bb, fmt='%0.1e')
+
+#projected average of dust temperature
+dens = F['PartType0']['Dust_Temperature'][:]
+bb = M.ProjectedAverage(dens, center=np.array([0,0,0]), res=res, size=2*rmax)
+np.savetxt(inputs.hdf5_dir + 'dusttemp_proj_' + inputs.snap + '_' + format(rmax, '.1f') + '_' + str(res) + '.txt', bb, fmt='%0.1e')
+
 print('All done!')

@@ -36,7 +36,7 @@ Js = ['10', '21', '32'] #, '43', '54', '65', '76', '87', '98', '109']
 fwhm_x = 5 #fwhm in arcsec in x direction
 fwhm_y = 5 #fwhm in arcsec in y direction
 dpc = 300 #distance to observer in pc
-moment = [0, 1, 2]
+moment = [0]
 
 
 #CO
@@ -46,12 +46,18 @@ for i in range(0, len(Js)):
 
     m_image = radmc3dImage()
     m_image.readImage('despotic/image_CO_despotic_J'+Js[i]+'.out')
-    bb = m_image.imConv(dpc=dpc, psfType='Gauss', pa=0., fwhm = [fwhm_x, fwhm_y])
+    bb = m_image.imConv(dpc=dpc, pa=0., fwhm = [fwhm_x, fwhm_y], tdiam_prim=None, tdiam_sec=None)
 
     for j in range(0, len(moment)):
         vv = bb.getMomentMap(moment=moment[j], nu0=freq, Tb=True, linear=True)
+        print('Min/max moment from my code: ', np.min(vv), np.max(vv))
         np.savetxt('despotic/despotic_co_mom_'+str(moment[j])+'_obsv_J'+Js[i]+'.txt', vv, fmt='%e')
 
+    m_image.plotMomentMap(moment=0, nu0=freq, dpc=dpc, Tb=True)
+    plt.savefig('moment_0.png')
+
+
+'''
     m_image = radmc3dImage()
     m_image.readImage('uclchem/image_CO_uclchem_J'+Js[i]+'.out')
     bb = m_image.imConv(dpc=dpc, psfType='Gauss', pa=0., fwhm = [fwhm_x, fwhm_y])
@@ -171,6 +177,6 @@ for i in range(0, len(Js)):
     for j in range(0, len(moment)):
         vv = bb.getMomentMap(moment=moment[j], nu0=freq, Tb=True, linear=True)
         np.savetxt('uclchem/uclchem_hnc_mom_'+str(moment[j])+'_obsv_J'+Js[i]+'.txt', vv, fmt='%e')
-
+'''
 
 print('All done!')

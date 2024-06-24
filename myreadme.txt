@@ -34,7 +34,7 @@
 10.) Step 9 will produce some output in the specified output directory. In particular, it will produce a file called numberdens_XXX.inp from the 3 different methods above in step 6.
      Make sure to rename the molecular numdens file you want to use to numberdens_co.inp as RADMC expects LAMDA Leiden database naming
 
-11.) Run radmc3d to produce image.out using numberdens_co.inp takes 1.5 hrs, submit as a job)
+11.) Run radmc3d to produce image.out using numberdens_co.inp takes 1.5 hrs, submit as a job
      Example script: radmc3d image npix 256 loadlambda fluxcons doppcatch inclline linelist nostar writepop sizepc 10.0 phi 0 incl 0 | tee output.txt
      Parameter values '256' and '10.0' should be the same as box_dim and (TWO*box_size) in the input file in step 8. NOTE the factor of two in box size since radmc needs the side length and not the length from the center.
 

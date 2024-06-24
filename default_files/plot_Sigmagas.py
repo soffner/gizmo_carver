@@ -48,7 +48,7 @@ center = np.median(pos,axis=0) #np.array([15.95957649, 15.54566532, 15.19446488]
 center[1]=center[1]-0.8125 #to get the dense clump in the center of the box
 center[0]=center[0]-0.1875
 
-rmax = 20.0 #float(input('Enter box side length in pc '))
+rmax = 2*inputs.box_size #float(input('Enter box side length in pc '))
 res = 256
 X = Y = np.linspace(-rmax/2., rmax/2., res)
 X, Y = np.meshgrid(X, Y)

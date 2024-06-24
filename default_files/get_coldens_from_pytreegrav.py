@@ -23,7 +23,7 @@ l_eff = (3 * vol / (4 * 3.14159))**(1./3.) #we model each gas particle as a sphe
 kappa = 0.02 #opacity in code units. Accurate opacity really matters only if the column is very anisotropic.
 sigma = mass*kappa
 
-rays = 10
+rays = 10 #can increase the number of rays to reduce correlated noise, but it gets more computationally expensive
 bb = pytreegrav.ColumnDensity(pos, sigma, l_eff, parallel=True, randomize_rays=True, rays=rays)
 bb_eff = -np.log(np.exp(-bb.clip(-300,300)).mean(axis=1)) # effective optical depth that would give the same radiation flux from a background; note clipping because overflow is not uncommon here
 NH_eff = bb_eff / kappa # effective column density *for this opacity* in code mass/code length^2

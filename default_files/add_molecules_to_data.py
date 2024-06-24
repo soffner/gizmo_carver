@@ -99,5 +99,9 @@ co_ucl = np.loadtxt(inputs.hdf5_dir+'hnc_abund_uclchem_'+inputs.snap+'.txt')
 f.create_dataset('/PartType0/HNCAbundUCLCHEM', data=co_ucl)
 print('Created new dataset HNCAbundUCLCHEM')
 
+#co_ucl = np.loadtxt(inputs.hdf5_dir+'c_abund_uclchem_'+inputs.snap+'.txt')
+#f.create_dataset('/PartType0/CAbundUCLCHEM', data=co_ucl)
+#print('Created new dataset CAbundUCLCHEM')
+
 f.close()
 

@@ -37,8 +37,8 @@ hncstr = 'restfreq_HNC_J'
 Js = ['10'] #, '21', '32', '43', '54', '65', '76', '87', '98', '109']
 moment = [0] #, 1, 2]
 
-fwhm_x = 50 #in arcsec
-fwhm_y = 50 #in arcsec
+fwhm_x = 5 #in arcsec
+fwhm_y = 5 #in arcsec
 dpc = 300 # distance to source in pc
 
 #we calculate two different moment maps: one for X_CO, in K km/s, and another for CO SLED and line ratio r, in Jy/pix * km/s
@@ -52,10 +52,10 @@ for i in range(0, len(Js)):
     m_image = radmc3dImage()
     m_image.readImage('uclchem/image_CO_uclchem_J'+Js[i]+'.out')
 
-    m_image.writeFits(fname='uclchem_co_J10_unconvolved.fits', dpc=dpc, nu0=freq, spectral_axis_vel=True)
+    m_image.writeFits(fname='uclchem/uclchem_co_J10_unconvolved.fits', dpc=dpc, nu0=freq, spectral_axis_vel=False, getBandwidthFromFile=True)
 
     #convolve with beam
     bb=m_image.imConv(dpc=dpc, pa=0., fwhm = [fwhm_x, fwhm_y], tdiam_prim=None, tdiam_sec=None)
     print('convolved with beam size ', bb.fwhm, ' arcsec')
-    bb.writeFits(fname='uclchem_co_J10_convolved_beam_'+format(fwhm_x, '.1f')+'.fits', dpc=dpc, nu0=freq, spectral_axis_vel=True)
+    bb.writeFits(fname='uclchem/uclchem_co_J10_convolved_beam_'+format(fwhm_x, '.1f')+'.fits', dpc=dpc, nu0=freq, spectral_axis_vel=False, getBandwidthFromFile=True)
 

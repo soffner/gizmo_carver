@@ -5,12 +5,14 @@ import yt
 import inputs_gizmo_carver as inputs
 from yt.units import *
 import numpy as np
-from new_fields_list import *
+from new_fields_list import add_custom_fields
 
 import matplotlib.pyplot as plt
 
 hdf5_file = inputs.hdf5_dir+'snapshot_'+inputs.snap+'.hdf5'
 ds = yt.load(hdf5_file, unit_base=inputs.unit_base)
+
+add_custom_fields(ds)
 
 print('using box size ', inputs.box_size, ' pc on either side of the center')
 
@@ -55,6 +57,36 @@ for i in range(0, ires):
 np.savetxt(inputs.hdf5_dir +'numco_uclchem_'+inputs.snap+'_'+format(inputs.box_size, '.1f')+'_'+str(ires)+'.txt', cc, fmt='%e')
 
 
+#numh2 = cs[('PartType0', 'CNumberDensityUCLCHEM')]
+#cc = np.zeros((ires, ires))
+#integrate along the z direction to find the column density
+#for i in range(0, ires):
+#           for j in range(0, ires):
+#                   cc[i][j] = (2.0*inputs.box_size/res.imag)*3.086e18*np.sum(numh2[i][j])*yt.YTQuantity(1, 'cm**-2')
+
+#np.savetxt(inputs.hdf5_dir +'numc_uclchem_'+inputs.snap+'_'+format(inputs.box_size, '.1f')+'_'+str(ires)+'.txt', cc, fmt='%e')
+
+'''
+numh2 = cs[('PartType0', 'CONumberDensityDespotic')]
+cc = np.zeros((ires, ires))
+#integrate along the z direction to find the column density
+for i in range(0, ires):
+           for j in range(0, ires):
+                   cc[i][j] = (2.0*inputs.box_size/res.imag)*3.086e18*(inputs.c13_over_c12*np.sum(numh2[i][j]))*yt.YTQuantity(1, 'cm**-2')
+
+np.savetxt(inputs.hdf5_dir +'num13co_despotic_'+inputs.snap+'_'+format(inputs.box_size, '.1f')+'_'+str(ires)+'.txt', cc, fmt='%e')
+
+
+numh2 = cs[('PartType0', 'CONumberDensityUCLCHEM')]
+cc = np.zeros((ires, ires))
+#integrate along the z direction to find the column density
+for i in range(0, ires):
+           for j in range(0, ires):
+                   cc[i][j] = (2.0*inputs.box_size/res.imag)*3.086e18*(inputs.c13_over_c12*np.sum(numh2[i][j]))*yt.YTQuantity(1, 'cm**-2')
+
+np.savetxt(inputs.hdf5_dir +'num13co_uclchem_'+inputs.snap+'_'+format(inputs.box_size, '.1f')+'_'+str(ires)+'.txt', cc, fmt='%e')
+
+
 numh2 = cs[('PartType0', 'HCNNumberDensityUCLCHEM')]
 cc = np.zeros((ires, ires))
 #integrate along the z direction to find the column density
@@ -72,3 +104,4 @@ for i in range(0, ires):
                    cc[i][j] = (2.0*inputs.box_size/res.imag)*3.086e18*np.sum(numh2[i][j])*yt.YTQuantity(1, 'cm**-2')
 
 np.savetxt(inputs.hdf5_dir +'numhnc_uclchem_'+inputs.snap+'_'+format(inputs.box_size, '.1f')+'_'+str(ires)+'.txt', cc, fmt='%e')
+'''
