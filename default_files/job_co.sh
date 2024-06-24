@@ -2,8 +2,8 @@
 #PBS -P iv23
 #PBS -q normal
 #PBS -l walltime=48:00:00
-#PBS -l ncpus=48
-#PBS -l mem=192GB
+#PBS -l ncpus=4
+#PBS -l mem=19GB
 #PBS -l storage=scratch/jh2+gdata/jh2
 #PBS -l wd
 #PBS -N carver_CO
@@ -13,7 +13,7 @@
 
 #to write levelpop_co.dat, include writepop keyword: radmc3d image npix 256 loadlambda fluxcons doppcatch inclline linelist nostar writepop sizepc 5.0 phi 0 incl 0 | tee output.txt
 #REMEMBER sizepc should be 2*inputs.box_size you provide in inputs_gizmo_carver, since radmc wants it from left to right edge
-sizepc=10.0
+sizepc=2.0
 phi=0
 incl=0
 npix=256

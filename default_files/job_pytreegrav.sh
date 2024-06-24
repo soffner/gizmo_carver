@@ -1,7 +1,7 @@
 #!/bin/bash
-#PBS -P iv23
-#PBS -q express
-#PBS -l walltime=24:00:00
+#PBS -P jh2
+#PBS -q normal
+#PBS -l walltime=48:00:00
 #PBS -l ncpus=48
 #PBS -l mem=192GB
 #PBS -l storage=scratch/jh2+gdata/jh2

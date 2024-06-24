@@ -1,9 +1,9 @@
 #!/bin/bash
 #PBS -P iv23
 #PBS -q normal
-#PBS -l walltime=14:00:00
-#PBS -l ncpus=48
-#PBS -l mem=192GB
+#PBS -l walltime=48:00:00
+#PBS -l ncpus=4
+#PBS -l mem=19GB
 #PBS -l storage=scratch/jh2+gdata/jh2
 #PBS -l wd
 #PBS -N carver_HCOp
@@ -12,7 +12,7 @@
 #PBS -M u6645980@alumni.anu.edu.au
 
 #to write levelpop_co.dat, include writepop keyword: radmc3d image npix 256 loadlambda fluxcons doppcatch inclline linelist nostar writepop sizepc 5.0 phi 0 incl 0 | tee output.txt
-sizepc=5.0
+sizepc=10.0
 phi=0
 incl=0
 npix=256
@@ -29,6 +29,7 @@ mv gas_temperature_HCOp.inp gas_temperature.inp
 cp -p despotic/numberdens_HCOp_despotic.inp .
 mv numberdens_HCOp_despotic.inp numberdens_hcop.inp
 
+: <<'COMMENT'
 #J=1-0
 cp -p HCOp_J10/camera_wavelength_micron_HCOpJ10.inp .
 mv camera_wavelength_micron_HCOpJ10.inp camera_wavelength_micron.inp
@@ -53,7 +54,6 @@ mv image.out image_HCOp_despotic_J32.out
 mv image_HCOp_despotic_J32.out despotic/
 mv output_HCOp_despotic_J32.txt despotic/
 
-: <<'COMMENT'
 #J=4-3
 cp -p HCOp_J43/camera_wavelength_micron_HCOpJ43.inp .
 mv camera_wavelength_micron_HCOpJ43.inp camera_wavelength_micron.inp
@@ -115,6 +115,7 @@ COMMENT
 cp -p uclchem/numberdens_HCOp_uclchem.inp .
 mv numberdens_HCOp_uclchem.inp numberdens_hcop.inp
 
+: <<'COMMENT'
 #J=1-0
 cp -p HCOp_J10/camera_wavelength_micron_HCOpJ10.inp .
 mv camera_wavelength_micron_HCOpJ10.inp camera_wavelength_micron.inp
@@ -130,6 +131,7 @@ radmc3d image npix $npix loadlambda fluxcons doppcatch inclline linelist nostar 
 mv image.out image_HCOp_uclchem_J21.out
 mv image_HCOp_uclchem_J21.out uclchem/
 mv output_HCOp_uclchem_J21.txt uclchem/
+COMMENT
 
 #J=3-2
 cp -p HCOp_J32/camera_wavelength_micron_HCOpJ32.inp .
