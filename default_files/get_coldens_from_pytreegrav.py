@@ -20,7 +20,7 @@ pos, mass, hsml, v = pos, pdata["Masses"], pdata["SmoothingLength"], pdata["Velo
 
 vol = mass/rho
 l_eff = (3 * vol / (4 * 3.14159))**(1./3.) #we model each gas particle as a sphere. This is also what pytreegrav models them as while doing RT.
-kappa = 0.02 #opacity in code units. Accurate opacity really matters only if the column is very anisotropic.
+kappa = 0.02 #*(inputs.dust_to_gas/1e-2) #opacity in code units, should be scaled with the dust2gas ratio normalized to solar. Accurate opacity really matters only if the column is very anisotropic.
 sigma = mass*kappa
 
 rays = 10 #can increase the number of rays to reduce correlated noise, but it gets more computationally expensive
