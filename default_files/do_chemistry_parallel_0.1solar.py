@@ -41,7 +41,7 @@ warnings.filterwarnings('ignore')
 ncpus=48
 path = '/g/data1b/jh2/ps3459/starforge_data/67/'
 snap = '1400'
-ucl_path = '/g/data1b/jh2/ps3459/UCLCHEM/mydata/'
+ucl_path = '/g/data1b/jh2/ps3459/gizmo_carver/data/'
 despcloud_fname = '/g/data1b/jh2/ps3459/despotic/cloudfiles/basic_starforge.desp'
 nheff_meshoid = np.loadtxt(path+'nh_eff_meshoid_10rays_'+snap+'.txt')
 
