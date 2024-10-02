@@ -63,3 +63,7 @@ After running RADMC-3D (`submit_script.sh`) on these files, the `radmc_image_pro
 to generate the moment 0, 1, and 2 maps of the output image file.
 
 For more complete instructions, see the [full documentation](https://github.com/seafen7/gizmo_carver/blob/main/doc/FULL_DOC.md).
+
+### Modifications to use UCLCHEM
+
+Look at `myreadme.txt` to see how can this repository be used to post-process STARFORGE simulations with UCLCHEM
